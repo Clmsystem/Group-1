@@ -225,18 +225,23 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h1 class="page-title"> ส่วนที่ 1 ผลการดำเนินงานตามตัวชี้วัดคำรับรองการปฏิบัติงาน ตามนโยบายเร่งด่วนของอธิการบดี (OKRs) </h1>
-              <nav aria-label="breadcrumb">
+              <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item active"><a href="">Objective</a></li>
                   <li class="breadcrumb-item" aria-current="page">Key Results</li>
                 </ol>
-              </nav>
+              </nav> -->
             </div>
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                  <div class="text-right">
-                    <button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มตัวชี้วัดตามคำรับรอง</button>
+                  <div class="row">
+                    <div class="col-md-6 text-left">
+                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2563</button>
+                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button>
+                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2565</button>
+                    </div>
+                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
                   </div>
                   <table class="table">
                       <thead>

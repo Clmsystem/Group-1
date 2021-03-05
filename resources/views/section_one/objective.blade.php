@@ -224,7 +224,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> เป้าหมายตามคำรับรองของตัวชี้วัดตามคำรับรอง {{$objective_name}} </h3>
+              <h3 class="page-title"> เป้าหมายตามคำรับรองของ {{$objective_name}} </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/section_one">Objective</a></li>
