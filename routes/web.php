@@ -33,3 +33,10 @@ Route::get('/login1', function () {
 Route::get('/login2', function () {
     return view('promote.login');
 });
+
+Route::get('/section_one', function () {
+    return view('section_one.content');
+});
+Route::get('/section_one/{objective_name}', function ($objective_name) {
+    return view('section_one.objective',['objective_name'=>$objective_name]);
+});
