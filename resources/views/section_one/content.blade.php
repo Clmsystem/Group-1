@@ -37,11 +37,11 @@
                   <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 text-left">
-                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2563</button>
+                      
                       <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button>
-                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2565</button>
+                     
                     </div>
-                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
+                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary"  data-toggle="modal" data-target="#modalAction">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
                   </div>
                   <table class="table">
                       <thead>
@@ -75,9 +75,35 @@
                     </table>
                   </div>
                 </div>
+      
             </div>
           </div>
           
+       
+            <div class="modal fade" id="modalAction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                        <form class="forms-sample" action="{{route('addobject')}}" method="post">
+                              @csrf
+                                <hr><br>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                    <h3 class="modal-title newFont" id="exampleModalLabel">เพิ่มตัวชี้วัดตามคำรับรอง</h3>
+                                    <hr>
+                                        <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
+                                    </div>                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ยกเลิก</button>
+                                    <input type="submit" value="บันทึก" class="btn btn-gradient-danger">
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
