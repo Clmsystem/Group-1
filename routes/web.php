@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ObjectGroup1;
+use App\Http\Controllers\Kr;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
