@@ -249,30 +249,28 @@
                           <th>ตัวชี้วัดตามคำรับรอง</th>
                           <th></th>
                         </tr>
+                        
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><a href="section_one/Smart Classrrom 100% (อคร.6)" class="text-success">Smart Classrrom 100% (อคร.6)<span>(สมบูรณ์แล้ว)</span></a></td>
-                          <td style="text-align:right">
-                            <button class="btn btn-gradient-warning" onclick="myFunction()">แก้ไข</button>
-                            <button class="btn btn-gradient-danger ml-4" onclick="myFunction()">ลบ</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td><a href="section_one/มุ่งเน้นการผลิต Digital Content เพื่อสนับสนุนการเรียนรู้ออนไลน์" class="text-danger">มุ่งเน้นการผลิต Digital Content เพื่อสนับสนุนการเรียนรู้ออนไลน์<span>(ไม่สมบูรณ์)</span></a></td>
+                        @foreach ($ob as $data)
+                            @if ($data->status==0)
+                            <tr>
+                              <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success">{{$data->nameObject}}<span>(สมบูรณ์แล้ว)</span></a></td>
+                              <td style="text-align:right">
+                                <button class="btn btn-gradient-warning" onclick="myFunction()">แก้ไข</button>
+                                <button class="btn btn-gradient-danger ml-4" onclick="myFunction()">ลบ</button>
+                              </td>
+                            </tr>
+                            @else
+                            <tr>
+                          <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-danger">{{$data->nameObject}}<span>(ไม่สมบูรณ์)</span></a></td>
                           <td style="text-align:right">
                             <button class="btn btn-gradient-warning">แก้ไข</button>
                             <button class="btn btn-gradient-danger ml-4" onclick="myFunction()">ลบ</button>
                           </td>
                         </tr>
-                        <tr>
-                          <td><a href="section_one/งบก่อสร้าง Digital Learning & Innovation Hub และ Central Library" class="text-success">งบก่อสร้าง Digital Learning & Innovation Hub และ Central Library<span>(สมบูรณ์แล้ว)</span></a></td>
-                          <td style="text-align:right">
-                            <button class="btn btn-gradient-warning ">แก้ไข</button>
-                            <button class="btn btn-gradient-danger ml-4" onclick="myFunction()">ลบ</button>
-                          </td>
-                        </tr>
-                        </tr>
+                        @endif
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
