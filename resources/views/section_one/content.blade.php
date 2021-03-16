@@ -141,8 +141,12 @@
                       <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2565</button>
                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary"  data-toggle="modal" data-target="#modalAction">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
 >>>>>>> d523ecd5cdd92796bc81510895b4072513eafb40
+=======
+                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
+>>>>>>> parent of d523ecd... add
 =======
                     <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
 >>>>>>> parent of d523ecd... add
@@ -151,6 +155,7 @@
                     <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
                     <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
                   </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 </a>
                 <div class="dropdown-divider"></div>
@@ -347,6 +352,10 @@
 =======
                 </div>
             </div>
+=======
+                </div>
+            </div>
+>>>>>>> parent of d523ecd... add
           </div>
           
           <!-- content-wrapper ends -->
