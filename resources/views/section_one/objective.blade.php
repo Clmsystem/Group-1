@@ -58,13 +58,11 @@
                       <div class="form-group">
                         <label for="keyResult">เลือกผู้รับผิดชอบ</label>
                         <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
-                          <option value="Laravel">Laravel</option>
-                          <option value="Symfony">Symfony</option>
-                          <option value="Codeigniter">Codeigniter</option>
-                          <option value="CakePHP">CakePHP</option>
-                          <option value="Zend">Zend</option>
-                          <option value="Yii">Yii</option>
-                          <option value="Slim">Slim</option>
+                          <option value="Laravel">สมศรี</option>
+                          <option value="Symfony">สมชาย</option>
+                          <option value="Codeigniter">สมหมาย</option>
+                          <option value="CakePHP">สมปอง</option>
+                          <option value="Zend">น้ำทิพย์</option>
                         </select>
                       </div>
                       <!-- <div class="form-group">
@@ -103,8 +101,8 @@
           </div>
           
           <!-- content-wrapper ends -->
-          <!-- Modal ADD -->
-          <div class="modal fade" id="modalAddKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+              <!-- Modal ADD -->
+              <div class="modal fade" id="modalAddKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
