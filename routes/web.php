@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ObjectGroup1;
-use App\Http\Controllers\Kr;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,20 +14,29 @@ use App\Http\Controllers\Kr;
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('index');
 });
 
 // Route::post('/login', [LoginController::class, 'index'])->name('login');
 
 
-// Route::post('/Valid', [LoginController::class,'index'],function ($argv){
+Route::post('/show', [LoginController::class,'index'],function ($log){
 
-// } )->name('valid');
+} )->name('show');
 
 
-Route::post('/index', function () {
-    return view('index');
-})->name('/');
 
-Route::get('/section_one', [ObjectGroup1::class,'index']);
-Route::get('/section_one/{id}', [Kr::class,'index']);
+Route::get('/login1', function () {
+    return view('manage.login');
+});
+
+Route::get('/login2', function () {
+    return view('promote.login');
+});
+
+Route::get('/section_one', function () {
+    return view('section_one.content');
+});
+Route::get('/section_one/{objective_name}', function ($objective_name) {
+    return view('section_one.objective',['objective_name'=>$objective_name]);
+});
