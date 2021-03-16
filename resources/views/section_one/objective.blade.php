@@ -11,13 +11,19 @@
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
-  </head>
+    </head>
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
@@ -38,22 +44,30 @@
                 </ol>
               </nav>
             </div>
-            <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มเป้าหมายตามคำรับรอง</button></p>
+            <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-gradient-primary" data-toggle="modal" data-target="#modalAddKR">+ เพิ่มเป้าหมายตามคำรับรอง</button></p>
             @foreach ($kr as $data)
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <form class="forms-sample">
+                    <form method="post" id="multiple_select_form">
                       <div class="form-group">
                         <label for="keyResult">เป้าหมายตามคำรับรอง</label>
                         <input type="text" class="form-control" id="keyResult" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
                         <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                       </div>
                       <div class="form-group">
-                        <label for="responsibility">ผู้รับผิดชอบรายงานข้อมูล</label>
-                        <input type="text" class="form-control" id="responsibility" placeholder="ชื่อและนามสกุล" value="ธรณิศ">
+                        <label for="keyResult">เลือกผู้รับผิดชอบ</label>
+                        <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
+                          <option value="Laravel">Laravel</option>
+                          <option value="Symfony">Symfony</option>
+                          <option value="Codeigniter">Codeigniter</option>
+                          <option value="CakePHP">CakePHP</option>
+                          <option value="Zend">Zend</option>
+                          <option value="Yii">Yii</option>
+                          <option value="Slim">Slim</option>
+                        </select>
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="result">ผล</label>
                         <textarea class="form-control" id="result" rows="4" placeholder="คำบรรยาย"></textarea>
                       </div>
@@ -74,11 +88,12 @@
                       <div class="form-group">
                         <label for="progress">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label>
                         <textarea class="form-control" id="progress" rows="4" placeholder="คำบรรยาย" value="{{$data->future_result}}">{{$data->future_result}}</textarea>
-                      </div>
+                      </div> -->
+                      <br />
                       <p style="text-align:right">
-                        <button type="submit" class="btn btn-gradient-primary mr-2" onclick="myFunction()">บันทึก</button>
-                        <button class="btn btn-gradient-light" onclick="myFunction()">ยกเลิก</button>
-                        <button class="btn btn-gradient-danger ml-2" onclick="myFunction()">ลบ</button>
+                        <button type="submit" class="btn btn-gradient-primary mr-2" >บันทึก</button>
+                        <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
+                        <button type="button" class="btn btn-gradient-danger ml-2" data-toggle="modal" data-target="#modalDeleteKR">ลบ</button>
                       </p>
                     </form>
                   </div>
@@ -88,6 +103,38 @@
           </div>
           
           <!-- content-wrapper ends -->
+                    <!-- Modal ADD -->
+                    <div class="modal fade" id="modalAddKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="modal-title newFont" id="exampleModalLabel1">เพิ่มเป้าหมายตามคำรับรอง</h3>
+                            <hr>
+                            <input type="text" class="form-control" id="keyResult" placeholder="เป้าหมายตามคำรับรอง" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-gradient-primary">เพิ่ม</button>
+                            <button type="button" class="btn btn-gradient-danger" data-dismiss="modal">ปิด</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <!-- Modal DELETE -->
+          <div class="modal fade" id="modalDeleteKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
+                            <hr>
+                            <h5 class="newFont"> ยืนยันที่จะลบ เป้าหมายตามคำรับรอง นี้หรือไม่ ? </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-gradient-danger">ลบ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer">
             <div class="container-fluid clearfix">
@@ -115,5 +162,39 @@
     <!-- Custom js for this page -->
     <script src="../../assets/js/file-upload.js"></script>
     <!-- End custom js for this page -->
+    <script>
+      $(document).ready(function(){
+      $('.selectpicker').selectpicker();
+
+      $('#framework').change(function(){
+        $('#hidden_framework').val($('#framework').val());
+      });
+
+      $('#multiple_select_form').on('submit', function(event){
+        event.preventDefault();
+        if($('#framework').val() != '')
+        {
+        var form_data = $(this).serialize();
+        $.ajax({
+          url:"insert.php",
+          method:"POST",
+          data:form_data,
+          success:function(data)
+          {
+          //console.log(data);
+          $('#hidden_framework').val('');
+          $('.selectpicker').selectpicker('val', '');
+          alert(data);
+          }
+        })
+        }
+        else
+        {
+        alert("Please select framework");
+        return false;
+        }
+      });
+      });
+    </script>
   </body>
 </html>
