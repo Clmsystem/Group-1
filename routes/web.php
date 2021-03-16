@@ -33,4 +33,5 @@ Route::post('/index', function () {
 
 Route::get('/section_one', [ObjectGroup1::class,'index']);
 Route::get('/section_one/{id}', [Kr::class,'index']);
+Route::post('/section_one/addKR', [Kr::class,'addKR'])->name('addKR');
 Route::post('/section_one/add', [ObjectGroup1::class,'addObject'])->name('addobject');

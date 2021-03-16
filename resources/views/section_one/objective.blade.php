@@ -103,17 +103,27 @@
           <!-- content-wrapper ends -->
               <!-- Modal ADD -->
               <div class="modal fade" id="modalAddKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <<div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h3 class="modal-title newFont" id="exampleModalLabel1">เพิ่มเป้าหมายตามคำรับรอง</h3>
-                            <hr>
-                            <input type="text" class="form-control" id="keyResult" placeholder="เป้าหมายตามคำรับรอง" value="">
+                        <form class="forms-sample" action="{{route('addKR')}}" method="post">
+                              @csrf
+                                <hr><br>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                    <h3 class="modal-title newFont" id="exampleModalLabel">เพิ่มเป้าหมายตามคำรับรอง</h3>
+                                    <hr>
+                                        <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
+                                        <input type="hidden" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="id" value="">
+                                    </div>                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ยกเลิก</button>
+                                    <input type="submit" value="บันทึก" class="btn btn-gradient-danger">
+                                </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-gradient-primary">เพิ่ม</button>
-                            <button type="button" class="btn btn-gradient-danger" data-dismiss="modal">ปิด</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
