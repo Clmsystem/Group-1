@@ -57,19 +57,20 @@
                             <tr>
                               <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success">{{$data->nameObject}}<span>(สมบูรณ์แล้ว)</span></a></td>
                               <td style="text-align:right">
-                                <button class="btn btn-gradient-warning" onclick="myFunction()">แก้ไข</button>
-                                <button class="btn btn-gradient-danger ml-4" onclick="myFunction()">ลบ</button>
+                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj">แก้ไข</button>
+                                <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#modalDeleteObj">ลบ</button>
                               </td>
                             </tr>
                             @else
                             <tr>
-                          <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-danger">{{$data->nameObject}}<span>(ไม่สมบูรณ์)</span></a></td>
-                          <td style="text-align:right">
-                            <button class="btn btn-gradient-warning">แก้ไข</button>
-                            <button class="btn btn-gradient-danger ml-4" onclick="myFunction()">ลบ</button>
-                          </td>
-                        </tr>
-                        @endif
+                            <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-danger">{{$data->nameObject}}<span>(ไม่สมบูรณ์)</span></a></td>
+                            <td style="text-align:right">
+                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj">แก้ไข</button>
+                                <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#modalDeleteObj">ลบ</button>
+                            </td>
+                            </tr>
+                            @endif
+
                         @endforeach
                       </tbody>
                     </table>
@@ -101,6 +102,46 @@
                             </form>
                         </div>
                         
+                    </div>
+                </div>
+            </div>
+            <!-- Modal ADD -->
+          <div class="modal fade" id="modalEditObj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="modal-title newFont" id="exampleModalLabel">แก้ไขตัวชี้วัดตามคำรับรอง</h3>
+                            <hr>
+                            <form class="forms-sample" action="{{route('addobject')}}" method="post">
+                              @csrf
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+
+                                        <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
+                                    </div>                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
+                                    <input type="submit" value="แก้ไข" class="btn btn-gradient-warning">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <!-- Modal DELETE -->
+          <div class="modal fade" id="modalDeleteObj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
+                            <hr>
+                            <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-gradient-danger">ลบ</button>
+                        </div>
                     </div>
                 </div>
             </div>
