@@ -136,12 +136,16 @@
                   <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 text-left">
-                      
+                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2563</button>
                       <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button>
-                     
+                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2565</button>
                     </div>
+<<<<<<< HEAD
                     <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary"  data-toggle="modal" data-target="#modalAction">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
 >>>>>>> d523ecd5cdd92796bc81510895b4072513eafb40
+=======
+                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary" onclick="myFunction()">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
+>>>>>>> parent of d523ecd... add
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
@@ -342,35 +346,9 @@
                 <!-- main-panel ends -->
 =======
                 </div>
-      
             </div>
           </div>
           
-       
-            <div class="modal fade" id="modalAction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                        <form class="forms-sample" action="{{route('addobject')}}" method="post">
-                              @csrf
-                                <hr><br>
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                    <h3 class="modal-title newFont" id="exampleModalLabel">เพิ่มตัวชี้วัดตามคำรับรอง</h3>
-                                    <hr>
-                                        <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
-                                    </div>                
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ยกเลิก</button>
-                                    <input type="submit" value="บันทึก" class="btn btn-gradient-danger">
-                                </div>
-                            </form>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
           <footer class="footer">

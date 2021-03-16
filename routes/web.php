@@ -44,5 +44,8 @@ Route::get('/section_one/{objective_name}', function ($objective_name) {
 =======
 Route::get('/section_one', [ObjectGroup1::class,'index']);
 Route::get('/section_one/{id}', [Kr::class,'index']);
+<<<<<<< HEAD
 Route::post('/section_one/add', [ObjectGroup1::class,'addObject'])->name('addobject');
 >>>>>>> d523ecd5cdd92796bc81510895b4072513eafb40
+=======
+>>>>>>> parent of d523ecd... add
