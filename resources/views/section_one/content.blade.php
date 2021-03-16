@@ -36,6 +36,7 @@
                 <a class="navbar-brand brand-logo-mini" href="../../index.html"><img
                         src="../../assets/images/logo-mini.svg" alt="logo" /></a>
             </div>
+<<<<<<< HEAD
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="mdi mdi-menu"></span>
@@ -129,11 +130,24 @@
                     <div class="preview-icon bg-success">
                       <i class="mdi mdi-calendar"></i>
                     </div>
+=======
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 text-left">
+                      
+                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button>
+                     
+                    </div>
+                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary"  data-toggle="modal" data-target="#modalAction">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
+>>>>>>> d523ecd5cdd92796bc81510895b4072513eafb40
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
                     <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
                   </div>
+<<<<<<< HEAD
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
@@ -326,6 +340,44 @@
                     <!-- partial -->
                 </div>
                 <!-- main-panel ends -->
+=======
+                </div>
+      
+            </div>
+          </div>
+          
+       
+            <div class="modal fade" id="modalAction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                        <form class="forms-sample" action="{{route('addobject')}}" method="post">
+                              @csrf
+                                <hr><br>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                    <h3 class="modal-title newFont" id="exampleModalLabel">เพิ่มตัวชี้วัดตามคำรับรอง</h3>
+                                    <hr>
+                                        <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
+                                    </div>                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ยกเลิก</button>
+                                    <input type="submit" value="บันทึก" class="btn btn-gradient-danger">
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer class="footer">
+            <div class="container-fluid clearfix">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates </a> from Bootstrapdash.com</span>
+>>>>>>> d523ecd5cdd92796bc81510895b4072513eafb40
             </div>
             <!-- page-body-wrapper ends -->
         </div>

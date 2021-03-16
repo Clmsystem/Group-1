@@ -26,6 +26,7 @@ Route::post('/show', [LoginController::class,'index'],function ($log){
 
 
 
+<<<<<<< HEAD
 Route::get('/login1', function () {
     return view('manage.login');
 });
@@ -40,3 +41,8 @@ Route::get('/section_one', function () {
 Route::get('/section_one/{objective_name}', function ($objective_name) {
     return view('section_one.objective',['objective_name'=>$objective_name]);
 });
+=======
+Route::get('/section_one', [ObjectGroup1::class,'index']);
+Route::get('/section_one/{id}', [Kr::class,'index']);
+Route::post('/section_one/add', [ObjectGroup1::class,'addObject'])->name('addobject');
+>>>>>>> d523ecd5cdd92796bc81510895b4072513eafb40
