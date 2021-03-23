@@ -57,7 +57,7 @@
                             <tr>
                               <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success">{{$data->nameObject}}<span>(สมบูรณ์แล้ว)</span></a></td>
                               <td style="text-align:right">
-                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj">แก้ไข</button>
+                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}}, '{{$data->nameObject}})';">แก้ไข</button>
                                 @foreach($obkr as $data2)
                                   @if ($data->idobject==$data2->object_idobject) 
                                     @break
@@ -72,7 +72,7 @@
                             <tr>
                             <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-danger">{{$data->nameObject}}<span>(ไม่สมบูรณ์)</span></a></td>
                             <td style="text-align:right">
-                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj">แก้ไข</button>
+                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}');">แก้ไข</button>
                                 @foreach($obkr as $data2)
                                   @if ($data->idobject==$data2->object_idobject) 
                                     @break
@@ -94,7 +94,7 @@
             </div>
           </div>
           
-       
+            <!-- Modal ADD -->
             <div class="modal fade" id="modalAction" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -119,19 +119,19 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal ADD -->
+            <!-- Modal Edit -->
           <div class="modal fade" id="modalEditObj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
                             <h3 class="modal-title newFont" id="exampleModalLabel">แก้ไขตัวชี้วัดตามคำรับรอง</h3>
                             <hr>
-                            <form class="forms-sample" action="{{route('addobject')}}" method="post">
+                            <form class="forms-sample" action="{{route('editobject')}}" method="post">
                               @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12">
-
-                                        <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
+                                        <input id="objectid" type="hidden" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject">
+                                        <input id="objectname" type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="nameobject" required>
                                     </div>                
                                 </div>
                                 <div class="modal-footer">
@@ -192,9 +192,13 @@
     <script src="../../assets/js/file-upload.js"></script>
     <!-- End custom js for this page -->
     <script type="text/javascript">
-      function addIdToModal(id) {
+      function addIdToModal(id){
+        document.getElementById('objectid').value = id;  
+      };
+      function addContentToModal(id,name){
         document.getElementById('objectid').value = id;
-      }
+        document.getElementById('objectname').value = name;
+      }; 
     </script>
   </body>
 </html>

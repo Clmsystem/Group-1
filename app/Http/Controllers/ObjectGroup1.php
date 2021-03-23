@@ -32,4 +32,9 @@ class ObjectGroup1 extends Controller
         DB::table('object')->where('idobject', '=', $request->keyobject)->delete();
         return redirect()->back()->with('sucess','ลบข้อมูลเรียบร้อย');
     }
+    public function editObject(Request $request)
+    {
+        DB::table('object')->where('idobject', $request->keyobject)->update(['nameObject' => $request->nameobject]);
+        return redirect()->back()->with('sucess','แก้ไขข้อมูลเรียบร้อย');
+    }
 }

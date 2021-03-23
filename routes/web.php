@@ -37,6 +37,7 @@ Route::post('/section_one/addKR', [Kr::class,'addKR'])->name('addKR');
 Route::post('/section_one/add', [ObjectGroup1::class,'addObject'])->name('addobject');
 Route::post('/section_one/updateKR', [Kr::class,'updateKR'])->name('updateKR');
 Route::post('/section_one/delete', [ObjectGroup1::class,'deleteObject'])->name('deleteobject');
+Route::post('/section_one/edit', [ObjectGroup1::class,'editObject'])->name('editobject');
 // ยกเลิกสิทธิ
 Route::get('/cancelautrority/{id}/{employee}', [Kr::class,'cancelautrority']);
 // กำหนดสิทธิ
