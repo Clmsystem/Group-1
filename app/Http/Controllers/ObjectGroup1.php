@@ -29,7 +29,7 @@ class ObjectGroup1 extends Controller
     }
     public function deleteObject(Request $request)
     {
-        DB::table('object')->where('idobject', '=', $request->keyobject)->delete();
+        DB::table('object')->where('idobject', '=', $request->delete_keyobject)->delete();
         return redirect()->back()->with('sucess','ลบข้อมูลเรียบร้อย');
     }
     public function editObject(Request $request)

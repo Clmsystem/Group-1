@@ -38,8 +38,36 @@
                   <div class="row">
                     <div class="col-md-6 text-left">
                       
-                      <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button>
-                     
+                      <!-- <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button> -->
+                      <!-- <div class="input-group-prepend show">
+                          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown</button>
+                          <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
+                            <a class="dropdown-item" href="#">มกราคม</a>
+                            <a class="dropdown-item" href="#">กุมภาพันธ์</a>
+                            <a class="dropdown-item" href="#">มีนาคม</a>
+                            <a class="dropdown-item" href="#">เมษายน</a>
+                            <a class="dropdown-item" href="#">พฤษภาคม</a>
+                            <a class="dropdown-item" href="#">มิถุนายน</a>
+                            <a class="dropdown-item" href="#">กรกฎาคม</a>
+                            <a class="dropdown-item" href="#">สิงหาคม</a>
+                            <a class="dropdown-item" href="#">กันยายน</a>
+                            <a class="dropdown-item" href="#">ตุลาคม</a>
+                            <a class="dropdown-item" href="#">พฤศจิกายน</a>
+                            <a class="dropdown-item" href="#"></a>
+                          <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                      </div> -->
+                      <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Country</label>
+                            <div class="col-sm-9">
+                              <select class="form-control">
+                                <option>America</option>
+                                <option>Italy</option>
+                                <option>Russia</option>
+                                <option>Britain</option>
+                              </select>
+                            </div>
+                          </div>
                     </div>
                     <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary"  data-toggle="modal" data-target="#modalAction">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
                   </div>
@@ -130,8 +158,8 @@
                               @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <input id="objectid" type="hidden" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject">
-                                        <input id="objectname" type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="nameobject" required>
+                                        <input id="object_edit_id" type="hidden" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject">
+                                        <input id="object_edit_name" type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="nameobject" required>
                                     </div>                
                                 </div>
                                 <div class="modal-footer">
@@ -153,7 +181,7 @@
                               <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
                               <form class="forms-sample" action="{{route('deleteobject')}}" method="post">
                                 @csrf
-                                <input id="objectid" type="hidden" class="form-control" name="keyobject">
+                                <input id="object_delete_id" type="hidden" class="form-control" name="delete_keyobject">
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
                                   <button type="submit" class="btn btn-gradient-danger">ลบ</button>
@@ -193,11 +221,11 @@
     <!-- End custom js for this page -->
     <script type="text/javascript">
       function addIdToModal(id){
-        document.getElementById('objectid').value = id;  
+        document.getElementById('object_delete_id').value = id;  
       };
       function addContentToModal(id,name){
-        document.getElementById('objectid').value = id;
-        document.getElementById('objectname').value = name;
+        document.getElementById('object_edit_id').value = id;
+        document.getElementById('object_edit_name').value = name;
       }; 
     </script>
   </body>
