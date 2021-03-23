@@ -65,8 +65,8 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th></th>
-                          <th  ></th>
+                        <th>ชื่อ</th>
+                        <th>กำหนดสิทธ์</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -175,39 +175,5 @@
     <!-- Custom js for this page -->
     <script src="../../assets/js/file-upload.js"></script>
     <!-- End custom js for this page -->
-    <script>
-      $(document).ready(function(){
-      $('.selectpicker').selectpicker();
-
-      $('#framework').change(function(){
-        $('#hidden_framework').val($('#framework').val());
-      });
-
-      $('#multiple_select_form').on('submit', function(event){
-        event.preventDefault();
-        if($('#framework').val() != '')
-        {
-        var form_data = $(this).serialize();
-        $.ajax({
-          url:"insert.php",
-          method:"POST",
-          data:form_data,
-          success:function(data)
-          {
-          //console.log(data);
-          $('#hidden_framework').val('');
-          $('.selectpicker').selectpicker('val', '');
-          alert(data);
-          }
-        })
-        }
-        else
-        {
-        alert("Please select framework");
-        return false;
-        }
-      });
-      });
-    </script>
   </body>
 </html>

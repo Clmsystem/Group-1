@@ -58,7 +58,14 @@
                               <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success">{{$data->nameObject}}<span>(สมบูรณ์แล้ว)</span></a></td>
                               <td style="text-align:right">
                                 <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj">แก้ไข</button>
-                                <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#modalDeleteObj">ลบ</button>
+                                @foreach($obkr as $data2)
+                                  @if ($data->idobject==$data2->object_idobject) 
+                                    @break
+                                  @elseif ($data2->idKR==$max) 
+                                    <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});">ลบ</button>
+                                  
+                                  @endif     
+                                @endforeach
                               </td>
                             </tr>
                             @else
@@ -66,7 +73,14 @@
                             <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-danger">{{$data->nameObject}}<span>(ไม่สมบูรณ์)</span></a></td>
                             <td style="text-align:right">
                                 <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj">แก้ไข</button>
-                                <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#modalDeleteObj">ลบ</button>
+                                @foreach($obkr as $data2)
+                                  @if ($data->idobject==$data2->object_idobject) 
+                                    @break
+                                  @elseif ($data2->idKR==$max) 
+                                    <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});">ลบ</button>
+                                  
+                                  @endif     
+                                @endforeach
                             </td>
                             </tr>
                             @endif
@@ -129,21 +143,25 @@
                     </div>
                 </div>
             </div>
-          <!-- Modal DELETE -->
-          <div class="modal fade" id="modalDeleteObj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+            <!-- Modal DELETE -->
+            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+              <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
-                            <hr>
-                            <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
+                              <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
+                              <hr>
+                              <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
+                              <form class="forms-sample" action="{{route('deleteobject')}}" method="post">
+                                @csrf
+                                <input id="objectid" type="hidden" class="form-control" name="keyobject">
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
+                                  <button type="submit" class="btn btn-gradient-danger">ลบ</button>
+                                </div>
+                              </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
-                            <button type="button" class="btn btn-gradient-danger">ลบ</button>
-                        </div>
-                    </div>
-                </div>
+                  </div>
+              </div>
             </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
@@ -173,5 +191,10 @@
     <!-- Custom js for this page -->
     <script src="../../assets/js/file-upload.js"></script>
     <!-- End custom js for this page -->
+    <script type="text/javascript">
+      function addIdToModal(id) {
+        document.getElementById('objectid').value = id;
+      }
+    </script>
   </body>
 </html>

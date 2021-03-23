@@ -10,7 +10,9 @@ class ObjectGroup1 extends Controller
  public function index()
     {
         $ob = DB::table('object')->get();
-        return view('section_one.content',compact('ob'));
+        $obkr = DB::table('Kr')->get();
+        $max = DB::table('Kr')->max('idKR');
+        return view('section_one.content',compact('ob','obkr','max'));
     }
     public function addObject(Request $request)
     {
@@ -24,5 +26,10 @@ class ObjectGroup1 extends Controller
 
         DB::table('object')->insert($data);
         return redirect()->back()->with('sucess','บันทึกข้อมูลเรียบร้อย');
+    }
+    public function deleteObject(Request $request)
+    {
+        DB::table('object')->where('idobject', '=', $request->keyobject)->delete();
+        return redirect()->back()->with('sucess','ลบข้อมูลเรียบร้อย');
     }
 }
