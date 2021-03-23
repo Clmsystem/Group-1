@@ -11,11 +11,11 @@
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> -->
 
     <!-- inject:css -->
     <!-- endinject -->
@@ -55,16 +55,41 @@
                         <input type="text" class="form-control" id="keyResult" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
                         <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                       </div>
-                      <div class="form-group">
-                        <label for="keyResult">เลือกผู้รับผิดชอบ</label>
-                        <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
-                          <option value="Laravel">สมศรี</option>
-                          <option value="Symfony">สมชาย</option>
-                          <option value="Codeigniter">สมหมาย</option>
-                          <option value="CakePHP">สมปอง</option>
-                          <option value="Zend">น้ำทิพย์</option>
-                        </select>
-                      </div>
+                      <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">สิทธิในการเข้าถึง</h4>
+                    </p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th  ></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      @foreach ($employee as $data2)
+                        <tr>
+                          <td>{{$data2->name_employee}}</td>
+                          <td>
+                          @foreach ($autrority as $data3)
+                              @if($data->KR_idKR == $data3->KR_idKR)
+                                  @if($data2->id_employee == $data3->Employee_id_employee)
+                                    <a class="badge badge-danger" href="{{url('/cancelautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ยกเลิกสิทธิ</a>
+                                    @break
+                                  @elseif( $data3->idautrority == $max)
+                                    <a class="badge badge-success" href="{{url('/giveautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ให้สิทธิ</a>
+                                  @endif
+                              @endif
+                          @endforeach
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
                       <!-- <div class="form-group">
                         <label for="result">ผล</label>
                         <textarea class="form-control" id="result" rows="4" placeholder="คำบรรยาย"></textarea>
