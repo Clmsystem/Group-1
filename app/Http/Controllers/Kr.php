@@ -76,4 +76,11 @@ class Kr extends Controller
         return redirect()->back()->with('sucess','บันทึกข้อมูลเรียบร้อย');
         
     }
+    public function updateKR(Request $request){
+        DB::table('Kr')
+        ->where('idKR', $request->id)
+        ->update(['nameKR'=> $request->result]);
+        return redirect()->back()->with('sucess','บันทึกข้อมูลเรียบร้อย');
+        
+    }
 }

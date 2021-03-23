@@ -49,10 +49,12 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <form method="post" id="multiple_select_form">
+                    <form method="post" action="{{route('updateKR')}}" id="multiple_select_form">
+                      @csrf
                       <div class="form-group">
                         <label for="keyResult">เป้าหมายตามคำรับรอง</label>
-                        <input type="text" class="form-control" id="keyResult" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
+                        <input type="text" class="form-control" name="result" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
+                        <input type="hidden" name="id"  value="{{$data->KR_idKR}}">
                         <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                       </div>
                       <div class="col-lg-6 grid-margin stretch-card">
@@ -90,28 +92,6 @@
                   </div>
                 </div>
               </div>
-                      <!-- <div class="form-group">
-                        <label for="result">ผล</label>
-                        <textarea class="form-control" id="result" rows="4" placeholder="คำบรรยาย"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="successPercent">ร้อยละผลสำเร็จ</label>
-                        <input type="number" class="form-control" id="successPercent" min="0" max="100" placeholder="ตัวเลข/เปอร์เซ็นต์" value="">
-                      </div>
-                      <div class="form-group">
-                        <label>อัปโหลดไฟล์หลักฐาน</label>
-                        <input type="file" name="img[]" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-gradient-primary" type="button">อัปโหลด</button>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="progress">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label>
-                        <textarea class="form-control" id="progress" rows="4" placeholder="คำบรรยาย" value="{{$data->future_result}}">{{$data->future_result}}</textarea>
-                      </div> -->
                       <br />
                       <p style="text-align:right">
                         <button type="submit" class="btn btn-gradient-primary mr-2" >บันทึก</button>
