@@ -15,11 +15,10 @@ class Kr extends Controller
         $kr = DB::table('kr')
             ->join('krdetail', 'kr.idKR', 'krdetail.KR_idKR')
             ->select('kr.nameKR', 'krdetail.*')->where('kr.object_idobject', '=', $id)->where('krdetail.mount', 1)->paginate(5);
-        $employee = DB::table('employee')->get()->where('id_position', '=', 0)->where('id_department', '=', 0);
+        $employee = DB::table('employee')->where('id_department', '=', 2)->get();
         $autrority = DB::table('autrority')->get();
-
         $max = DB::table('autrority')->max('idautrority');
-        dd($autrority, $max);
+        // dd($autrority, $max);
         return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max'));
     }
     public function addKR(Request $request)
@@ -46,12 +45,12 @@ class Kr extends Controller
         }
 
         // insert สิทธ์ ซึ่งจะว่างไว้ก่อน
-        // $data3 = array();
-        // $data3["KR_idKR"] = $max;
-        // $data3["Employee_id_employee"] = 0;
-        // $data3["Employee_id_position"] = 0;
-        // $data3["Employee_id_department"] = 0;
-        // DB::table('autrority')->insert($data3);
+        $data3 = array();
+        $data3["KR_idKR"] = $max;
+        $data3["Employee_id_employee"] = 0;
+        $data3["Employee_id_position"] = 0;
+        $data3["Employee_id_department"] = 0;
+        DB::table('autrority')->insert($data3);
 
 
         return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
@@ -75,9 +74,16 @@ class Kr extends Controller
     }
     public function updateKR(Request $request)
     {
-        DB::table('Kr')
+        DB::table('kr')
             ->where('idKR', $request->id)
             ->update(['nameKR' => $request->result]);
         return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
+    }
+    public function deletekr(Request $request)
+    {
+        DB::table('autrority')->where('KR_idKR', '=', $request->delete_keyobject)->delete();
+        DB::table('krdetail')->where('KR_idKR', '=', $request->delete_keyobject)->delete();
+        DB::table('kr')->where('idKR', '=', $request->delete_keyobject)->delete();
+        return redirect()->back()->with('sucess', 'ลบข้อมูลเรียบร้อย');
     }
 }

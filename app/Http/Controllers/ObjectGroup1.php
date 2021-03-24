@@ -12,6 +12,7 @@ class ObjectGroup1 extends Controller
         $ob = DB::table('object')->get();
         $obkr = DB::table('kr')->get();
         $max = DB::table('kr')->max('idKR');
+        //dd($ob, $obkr, $max);
         return view('section_one.content', compact('ob', 'obkr', 'max'));
     }
     public function addObject(Request $request)

@@ -71,4 +71,5 @@ Route::post('/section_one/edit', [ObjectGroup1::class, 'editObject'])->name('edi
 Route::get('/cancelautrority/{id}/{employee}', [Kr::class, 'cancelautrority']);
 // กำหนดสิทธิ
 Route::get('/giveautrority/{id}/{employee}', [Kr::class, 'giveautrority']);
+Route::post('/section_one/deletekr', [Kr::class, 'deletekr'])->name('deletekr');
 // end Group1

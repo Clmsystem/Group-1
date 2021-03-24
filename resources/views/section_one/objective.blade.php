@@ -68,7 +68,7 @@
                           <thead>
                             <tr>
                               <th>ชื่อ</th>
-                              <th>กำหนดสิทธ์</th>
+                              <th>กำหนดสิทธิ</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -79,10 +79,12 @@
                                 @foreach ($autrority as $data3)
                                 @if($data->KR_idKR == $data3->KR_idKR)
                                 @if($data2->id_employee == $data3->Employee_id_employee)
-                                <a class="badge badge-danger" href="{{url('/cancelautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">{{$data3->idautrority}}</a>
+                                <a class="badge badge-danger" href="{{url('/cancelautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ยกเลิกสิทธิ</a>
                                 @elseif( $data3->idautrority == $max)
-                                <a class="badge badge-success" href="{{url('/giveautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">{{$data3->idautrority}}</a>
+                                <a class="badge badge-success" href="{{url('/giveautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ให้สิทธิ</a>
                                 @endif
+                                @elseif($data2->id_employee == $data3->Employee_id_employee)
+                                <a class="badge badge-success" href="{{url('/giveautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ให้สิทธิ</a>
                                 @endif
                                 @endforeach
                               </td>
@@ -97,7 +99,7 @@
                   <p style="text-align:right">
                     <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
                     <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
-                    <button type="button" class="btn btn-gradient-danger ml-2" data-toggle="modal" data-target="#modalDeleteKR">ลบ</button>
+                    <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});">ลบ</button>
                   </p>
                 </form>
               </div>
@@ -134,17 +136,22 @@
         </div>
       </div>
       <!-- Modal DELETE -->
-      <div class="modal fade" id="modalDeleteKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+      <!-- Modal DELETE -->
+      <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-body">
               <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
               <hr>
-              <h5 class="newFont"> ยืนยันที่จะลบ เป้าหมายตามคำรับรอง นี้หรือไม่ ? </h5>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
-              <button type="button" class="btn btn-gradient-danger">ลบ</button>
+              <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
+              <form class="forms-sample" action="{{route('deletekr')}}" method="post">
+                @csrf
+                <input id="object_delete_id" type="hidden" class="form-control" name="delete_keyobject">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
+                  <button type="submit" class="btn btn-gradient-danger">ลบ</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -176,6 +183,11 @@
   <!-- Custom js for this page -->
   <script src="../../assets/js/file-upload.js"></script>
   <!-- End custom js for this page -->
+  <script type="text/javascript">
+    function addIdToModal(id) {
+      document.getElementById('object_delete_id').value = id;
+    };
+  </script>
 </body>
 
 </html>
