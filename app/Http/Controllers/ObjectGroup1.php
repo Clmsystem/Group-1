@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class ObjectGroup1 extends Controller
 {
- public function index()
+    public function index()
     {
         $ob = DB::table('object')->get();
-        $obkr = DB::table('Kr')->get();
-        $max = DB::table('Kr')->max('idKR');
-        return view('section_one.content',compact('ob','obkr','max'));
+        $obkr = DB::table('kr')->get();
+        $max = DB::table('kr')->max('idKR');
+        return view('section_one.content', compact('ob', 'obkr', 'max'));
     }
     public function addObject(Request $request)
     {
@@ -22,19 +22,19 @@ class ObjectGroup1 extends Controller
         $data["nameObject"] = $request->keyobject;
         $data["status"] = 1;
         $data["year_year_id"] = 2564;
-        $data["idobject"] = $id+1;
+        $data["idobject"] = $id + 1;
 
         DB::table('object')->insert($data);
-        return redirect()->back()->with('sucess','บันทึกข้อมูลเรียบร้อย');
+        return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
     }
     public function deleteObject(Request $request)
     {
         DB::table('object')->where('idobject', '=', $request->delete_keyobject)->delete();
-        return redirect()->back()->with('sucess','ลบข้อมูลเรียบร้อย');
+        return redirect()->back()->with('sucess', 'ลบข้อมูลเรียบร้อย');
     }
     public function editObject(Request $request)
     {
         DB::table('object')->where('idobject', $request->keyobject)->update(['nameObject' => $request->nameobject]);
-        return redirect()->back()->with('sucess','แก้ไขข้อมูลเรียบร้อย');
+        return redirect()->back()->with('sucess', 'แก้ไขข้อมูลเรียบร้อย');
     }
 }
