@@ -12,6 +12,7 @@ use App\Http\Controllers\insertController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\Kr;
 use App\Http\Controllers\ObjectGroup1;
+use App\Http\Controllers\UserOKR;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,4 +73,7 @@ Route::get('/cancelautrority/{id}/{employee}', [Kr::class, 'cancelautrority']);
 // กำหนดสิทธิ
 Route::get('/giveautrority/{id}/{employee}', [Kr::class, 'giveautrority']);
 Route::post('/section_one/deletekr', [Kr::class, 'deletekr'])->name('deletekr');
+Route::get('/userObject/{id}', [UserOKR::class, 'index']);
+Route::get('/userKr/{id}/{mount}', [UserOKR::class, 'userKR']);
+Route::post('/userKr/updateKr', [UserOKR::class, 'updateKRdetail'])->name('updateKRdetail');
 // end Group1
