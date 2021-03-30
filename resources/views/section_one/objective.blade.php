@@ -21,6 +21,47 @@
   <link rel="shortcut icon" href="assets/images/favicon.ico" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+
+    /* adjust font this page */
+    .newFont {
+        font-family: 'Mitr', sans-serif;
+    }
+
+    .newFonts {
+        font-family: 'Mitr', sans-serif;
+        font-size: 50px !important;
+    }
+
+
+    .dropdown .dropdown-menu .dropdown-item {
+        font-size: 0.8rem;
+        padding: 0;
+    }
+
+    /* adjust btn position */
+    .button-position {
+        float: right;
+        margin: -8px;
+    }
+
+
+
+    td.break {
+        word-wrap: break-word;
+        /* word-break: break-all; */
+        white-space: normal;
+    }
+
+
+    /* adjust btn size */
+    .btns {
+        padding: 0.9rem 2em;
+        font-size: 0.875rem;
+    }
+</style>
 </head>
 <body>
   <div class="container-scroller">
@@ -33,30 +74,31 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+        <h1 class="text-success mdi mdi-face newFont" > ยินดีต้อนรับคุณ Admin</h1>
           <div class="page-header">
-            <h3 class="page-title"> เป้าหมายตามคำรับรองของ </h3>
+            <h3 class="newFont"> เป้าหมายตามคำรับรองของ </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/section_one">Objective</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Key Results</li>
+                <li class="breadcrumb-item newFont" aria-current="page">Objective</a></li>
+                <li class="breadcrumb-item active newFont"><a href="/section_one">Key Results</a></li>
               </ol>
             </nav>
           </div>
-          <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-gradient-primary" data-toggle="modal" data-target="#modalAddKR">+ เพิ่มเป้าหมายตามคำรับรอง</button></p>
+          <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus newFont" data-toggle="modal" data-target="#modalAddKR"> เพิ่มเป้าหมายตามคำรับรอง</button></p>
           @foreach ($kr as $data)
           <div class="col-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
                 <form method="post" action="{{route('updateKR')}}" id="multiple_select_form">
                   @csrf
-                  <div class="form-group">
-                    <label for="keyResult">เป้าหมายตามคำรับรอง</label>
-                    <input type="text" class="form-control" name="result" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
+                  <div class="form-group newFont">
+                    <label for="keyResult ">เป้าหมายตามคำรับรอง</label>
+                    <input type="text" class="form-control newFont" name="result" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
                     <input type="hidden" name="id" value="{{$data->KR_idKR}}">
-                    <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
+                    <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i> ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                   </div>
                   <div class="col-lg-6 grid-margin stretch-card">
-                    <select name="employee[]" id="emp2" class="form-control selectpicker" data-live-search="true" multiple>
+                    <select name="employee[]" id="emp2" class="form-control selectpicker"data-live-search="true" multiple>
                         @foreach ($employee as $data2)
                           @if($autrority->count()>0)
                             @foreach ($autrority as $data3)
@@ -80,9 +122,9 @@
                     <br/>
                     <br/>
                     <p style="text-align:right">
-                      <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
-                      <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
-                      <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});">ลบ</button>
+                      <button type="submit" class="btn btn-success btn-fw mr-2 mdi mdi-content-save-all newFont"> บันทึก</button>
+                      <button type="reset" class="btn btn-gradient-light newFont">ยกเลิก</button>
+                      <button class="btn btn-danger ml-4 mdi mdi-delete-forever newFont" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});"> ลบ</button>
                     </p>
                 </form>
               </div>
@@ -109,7 +151,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-gradient-primary newFont" data-dismiss="modal">ยกเลิก</button>
                     <input type="submit" value="บันทึก" class="btn btn-gradient-danger">
                   </div>
                 </form>
