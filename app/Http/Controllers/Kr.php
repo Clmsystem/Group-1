@@ -43,41 +43,34 @@ class Kr extends Controller
             $data2["KR_object_idobject"] = $id;
             DB::table('krdetail')->insert($data2);
         }
-
-        // insert สิทธ์ ซึ่งจะว่างไว้ก่อน
-        $data3 = array();
-        $data3["KR_idKR"] = $max;
-        $data3["Employee_id_employee"] = 0;
-        $data3["Employee_id_position"] = 0;
-        $data3["Employee_id_department"] = 0;
-        DB::table('autrority')->insert($data3);
-
-
-        return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
-    }
-    // ยกเลิกสิทธิ
-    public function cancelautrority($id, $employee)
-    {
-        DB::table('autrority')->where('KR_idKR', '=', $id)->where('Employee_id_employee', '=', $employee)->delete();
-        return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
-    }
-    // กำหนดสิทธิ
-    public function giveautrority($id, $employee)
-    {
-        $data = array();
-        $data["KR_idKR"] = $id;
-        $data["Employee_id_employee"] = $employee;
-        $data["Employee_id_position"] = 0;
-        $data["Employee_id_department"] = 0;
-        DB::table('autrority')->insert($data);
         return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
     }
     public function updateKR(Request $request)
     {
         DB::table('kr')
-            ->where('idKR', $request->id)
-            ->update(['nameKR' => $request->result]);
-        return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
+        ->where('idKR', $request->id)
+        ->update(['nameKR'=> $request->result]);
+        if(!empty($request->employee)){
+            DB::table('autrority')
+            ->where('KR_idKR', $request->id)
+            ->delete();
+            foreach($request->employee as $emp){
+                $data = array();
+                $max = DB::table('autrority')->max('idautrority');
+                $data["idautrority"] = intval($max+1);
+                $data["KR_idKR"] = intval($request->id);
+                $data["Employee_id_employee"] = intval($emp); 
+                $data["Employee_id_position"] = 0; 
+                $data["Employee_id_department"] = 0;
+                DB::table('autrority')->insert($data);
+            };
+        }else{
+            DB::table('autrority')
+            ->where('KR_idKR', $request->id)
+            ->delete();
+        }
+
+        return redirect()->back()->with('success','บันทึกข้อมูลเรียบร้อย');
     }
     public function deletekr(Request $request)
     {

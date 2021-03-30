@@ -10,22 +10,18 @@
   <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script> -->
-
-  <!-- inject:css -->
-  <!-- endinject -->
   <!-- Layout styles -->
   <link rel="stylesheet" href="../../assets/css/style.css">
   <!-- End layout styles -->
   <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="assets/images/favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </head>
-
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -60,47 +56,34 @@
                     <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                   </div>
                   <div class="col-lg-6 grid-margin stretch-card">
-                    <div class="card">
-                      <div class="card-body">
-                        <h4 class="card-title">สิทธิในการเข้าถึง</h4>
-                        </p>
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th>ชื่อ</th>
-                              <th>กำหนดสิทธิ</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach ($employee as $data2)
-                            <tr>
-                              <td>{{$data2->name_employee}}</td>
-                              <td>
-                                @foreach ($autrority as $data3)
-                                @if($data->KR_idKR == $data3->KR_idKR)
-                                @if($data2->id_employee == $data3->Employee_id_employee)
-                                <a class="badge badge-danger" href="{{url('/cancelautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ยกเลิกสิทธิ</a>
-                                @elseif( $data3->idautrority == $max)
-                                <a class="badge badge-success" href="{{url('/giveautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ให้สิทธิ</a>
-                                @endif
-                                @elseif($data2->id_employee == $data3->Employee_id_employee)
-                                <a class="badge badge-success" href="{{url('/giveautrority/'.$data->KR_idKR.'/'.$data2->id_employee)}}">ให้สิทธิ</a>
-                                @endif
-                                @endforeach
-                              </td>
-                            </tr>
+                    <select name="employee[]" id="emp2" class="form-control selectpicker" data-live-search="true" multiple>
+                        @foreach ($employee as $data2)
+                          @if($autrority->count()>0)
+                            @foreach ($autrority as $data3)
+                              @if($data->KR_idKR == $data3->KR_idKR)
+                                  @if($data2->id_employee == $data3->Employee_id_employee)
+                                    <option selected='selected' value="{{$data2->id_employee}}">{{$data2->name_employee}}</option>
+                                    @break
+                                  @elseif($data3->idautrority==$max)
+                                    <option value="{{$data2->id_employee}}">{{$data2->name_employee}}</option>
+                                  @endif
+                              @elseif($data3->idautrority==$max)
+                                <option value="{{$data2->id_employee}}">{{$data2->name_employee}}</option>
+                              @endif
                             @endforeach
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                          @else
+                            <option value="{{$data2->id_employee}}">{{$data2->name_employee}}</option>
+                          @endif
+                        @endforeach  
+                      </select >
                   </div>
-                  <br />
-                  <p style="text-align:right">
-                    <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
-                    <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
-                    <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});">ลบ</button>
-                  </p>
+                    <br/>
+                    <br/>
+                    <p style="text-align:right">
+                      <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
+                      <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
+                      <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});">ลบ</button>
+                    </p>
                 </form>
               </div>
             </div>
@@ -111,7 +94,7 @@
         <!-- content-wrapper ends -->
         <!-- Modal ADD -->
         <div class="modal fade" id="modalAddKR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-          <<div class="modal-dialog" role="document">
+          <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-body">
                 <form class="forms-sample" action="{{route('addKR')}}" method="post">
@@ -171,7 +154,7 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+  <!-- <script src="../../assets/vendors/js/vendor.bundle.base.js"></script> -->
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <!-- End plugin js for this page -->
