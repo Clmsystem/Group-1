@@ -17,6 +17,47 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+
+    /* adjust font this page */
+    .newFont {
+        font-family: 'Mitr', sans-serif;
+    }
+
+    .newFonts {
+        font-family: 'Mitr', sans-serif;
+        font-size: 50px !important;
+    }
+
+
+    .dropdown .dropdown-menu .dropdown-item {
+        font-size: 0.8rem;
+        padding: 0;
+    }
+
+    /* adjust btn position */
+    .button-position {
+        float: right;
+        margin: -8px;
+    }
+
+
+
+    td.break {
+        word-wrap: break-word;
+        /* word-break: break-all; */
+        white-space: normal;
+    }
+
+
+    /* adjust btn size */
+    .btns {
+        padding: 0.9rem 2em;
+        font-size: 0.875rem;
+    }
+</style>
   </head>
   <body>
     <div class="container-scroller">
@@ -29,14 +70,18 @@
       <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
+          <h1 class="text-success mdi mdi-face newFont" > ยินดีต้อนรับคุณ Admin</h1>
+
             <div class="page-header">
-              <h1 class="page-title"> ส่วนที่ 1 ผลการดำเนินงานตามตัวชี้วัดคำรับรองการปฏิบัติงาน ตามนโยบายเร่งด่วนของอธิการบดี (OKRs) </h1>
+              <h3 class="newFont"> ส่วนที่ 1 ผลการดำเนินงานตามตัวชี้วัดคำรับรองการปฏิบัติงาน ตามนโยบายเร่งด่วนของอธิการบดี (OKRs) </h3>
             </div>
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                   <div class="row">
-                    <div class="col-md-6 text-left">
+                  <div class="col-md-12">
+                    <div class="text-right">
+                    <!-- <div class="col-md-6 text-left"> -->
                       
                       <!-- <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button> -->
                       <!-- <div class="input-group-prepend show">
@@ -57,25 +102,30 @@
                           <a class="dropdown-item" href="#">Separated link</a>
                         </div>
                       </div> -->
-                      <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Country</label>
+                      <!-- <div class="form-group row">
+                            <label class="col-sm-3 col-form-label newFont">Country</label>
                             <div class="col-sm-9">
-                              <select class="form-control">
+                              <select class="form-control newFont">
                                 <option>America</option>
                                 <option>Italy</option>
                                 <option>Russia</option>
                                 <option>Britain</option>
                               </select>
                             </div>
-                          </div>
+                          </div> -->
+                    <!-- </div> -->
+                      <button class="btn btn-gradient-success btn-md ml-3 mdi mdi-lock" > Admin</button>
+                      <button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus  newFont"  data-toggle="modal" data-target="#modalAction"> เพิ่มตัวชี้วัดตามคำรับรอง</button>
+                      </div>
                     </div>
-                    <div class="col-md-6 text-right"><button class="btn btn-lg btn-gradient-primary"  data-toggle="modal" data-target="#modalAction">+ เพิ่มตัวชี้วัดตามคำรับรอง</button></div>
                   </div>
+                    
+               
                   <table class="table">
                       <thead>
                         <tr>
-                          <th>ตัวชี้วัดตามคำรับรอง</th>
-                          <th></th>
+                          <h5 class = newFont>ตัวชี้วัดตามคำรับรอง</h5>
+                        <th></th>
                         </tr>
                         
                       </thead>
@@ -83,14 +133,14 @@
                         @foreach ($ob as $data)
                             @if ($data->status==0)
                             <tr>
-                              <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success">{{$data->nameObject}}<span>(สมบูรณ์แล้ว)</span></a></td>
+                              <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success newFont">{{$data->nameObject}}<span> (สมบูรณ์แล้ว)</span></a></td>
                               <td style="text-align:right">
-                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}}, '{{$data->nameObject}})';">แก้ไข</button>
+                                <button class="btn btn-warning btn-md " data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}}, '{{$data->nameObject}})';"> แก้ไข</button>
                                 @foreach($obkr as $data2)
                                   @if ($data->idobject==$data2->object_idobject) 
                                     @break
                                   @elseif ($data2->idKR==$max) 
-                                    <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});">ลบ</button>
+                                    <button class="btn btn-danger btn-md ml-4 " data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
                                   
                                   @endif     
                                 @endforeach
@@ -98,14 +148,14 @@
                             </tr>
                             @else
                             <tr>
-                            <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-danger">{{$data->nameObject}}<span>(ไม่สมบูรณ์)</span></a></td>
+                            <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-dark newFont">{{$data->nameObject}}</a></td>
                             <td style="text-align:right">
-                                <button class="btn btn-gradient-warning" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}');">แก้ไข</button>
+                                <button class="btn btn-warning btn-md " data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}');"> แก้ไข</button>
                                 @foreach($obkr as $data2)
                                   @if ($data->idobject==$data2->object_idobject) 
                                     @break
                                   @elseif ($data2->idKR==$max) 
-                                    <button class="btn btn-gradient-danger ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});">ลบ</button>
+                                    <button class="btn btn-danger btn-md ml-4 " data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
                                   
                                   @endif     
                                 @endforeach

@@ -18,6 +18,46 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+
+    /* adjust font this page */
+    .newFont {
+        font-family: 'Mitr', sans-serif;
+    }
+
+    .newFonts {
+        font-family: 'Mitr', sans-serif;
+        font-size: 50px !important;
+    }
+
+
+    .dropdown .dropdown-menu .dropdown-item {
+        font-size: 0.8rem;
+        padding: 0;
+    }
+
+    /* adjust btn position */
+    .button-position {
+        float: right;
+        margin: -8px;
+    }
+
+
+
+    td.break {
+        word-wrap: break-word;
+        /* word-break: break-all; */
+        white-space: normal;
+    }
+
+
+    /* adjust btn size */
+    .btns {
+        padding: 0.9rem 2em;
+        font-size: 0.875rem;
+    }
+</style>
 </head>
 
 <body>
@@ -221,10 +261,11 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <h2 class="page-title">ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}} </h2>
+                    <h1 class="text-success mdi mdi-face newFont" > ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}} </h1>
                     <div class="page-header">
-                        <h3 class="page-title">ส่วนที่ 1 ผลการดำเนินงานตามตัวชี้วัดคำรับรองการปฏิบัติงาน ตามนโยบายเร่งด่วนของอธิการบดี (OKRs) </h3>
-                        <div class="dropdown">
+                        <h3 class="page-title newFont">ส่วนที่ 1 ผลการดำเนินงานตามตัวชี้วัดคำรับรองการปฏิบัติงาน ตามนโยบายเร่งด่วนของอธิการบดี (OKRs) </h3>
+
+                        <!-- <div class="dropdown">
                             <button class="btn btn-gradient-danger text-black dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 เดือน
                             </button>
@@ -242,17 +283,17 @@
                                         <a class="dropdown-item" href="#">พฤศจิกายน</a>
                                         <a class="dropdown-item" href="#">ธันวาคม</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-gradient-primary" onclick="myFunction()">2564</button> <br><br>
+                                    <button type="button" class="float-right btn btn-gradient-primary newFont" onclick="myFunction()">2564</button> <br><br>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>ตัวชี้วัดตามคำรับรอง</th>
+                                                <h5 class = newFont>ตัวชี้วัดตามคำรับรอง</h5>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -260,11 +301,11 @@
                                             @foreach ($userObject as $data)
                                             @if ($data->status==0)
                                             <tr>
-                                                <td><a href="{{url('/userKr/'.$data->idobject.'/'.$mount)}}" class="text-success">{{$data->nameObject}}</a></td>
+                                                <td><a href="{{url('/userKr/'.$data->idobject.'/'.$mount)}}" class="text-success mdi mdi-emoticon newFont"> {{$data->nameObject}}</a></td>
                                             </tr>
                                             @else
                                             <tr>
-                                                <td><a href="{{url('/userKr/'.$data->idobject.'/'.$mount)}}" class="text-danger">{{$data->nameObject}}</a></td>
+                                                <td><a href="{{url('/userKr/'.$data->idobject.'/'.$mount)}}" class="text-danger mdi mdi-emoticon-neutral newFont"> {{$data->nameObject}}</a></td>
                                                 @endif
                                                 @endforeach
                                         </tbody>
