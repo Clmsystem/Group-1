@@ -29,7 +29,8 @@ class UserOKR extends Controller
             ->where('krdetail.KR_object_idobject', '=', $Object)
             ->where('krdetail.mount', '=', $mount)
             ->get();
-        return view('userGroup1.kr', compact('userKR'));
+
+        return view('userGroup1.kr', compact('userKR', 'mount', 'Object'));
     }
     public function updateKRdetail(Request $request)
     {
@@ -38,5 +39,21 @@ class UserOKR extends Controller
             ->where('idKRdetail', $request->id)
             ->update(['result' => $request->result, 'percent' => $request->percent, 'future_result' => $request->future_result, 'nameUser' => $idUser]);
         return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
+    }
+    public function userKRdetail(Request $request)
+    {
+        $Object = $request->Object;
+        $mount = $request->mount;
+        $idUser = session()->get('user')['id_employee'];
+        $userKR = DB::table('object')
+            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+            ->where('autrority.Employee_id_employee', '=', $idUser)
+            ->where('krdetail.KR_object_idobject', '=', $Object)
+            ->where('krdetail.mount', '=', $mount)
+            ->get();
+
+        return view('userGroup1.kr', compact('userKR', 'mount', 'Object'));
     }
 }

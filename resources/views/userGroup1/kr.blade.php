@@ -40,81 +40,105 @@
                     <div class="page-header">
                         <h3 class="page-title">ตัวชี้วัดตามคำรับรอง </h3>
                     </div>
-                    @foreach ($userKR as $data)
-                    <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h class="card-title">{{$data->nameKR}}</h4>
-                                        <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="exampleInputName1">ผล</label>
-                                                <input type="text" class="form-control" name="result" id="exampleInputName1" placeholder="คำบรรยาย" value="{{$data->result}}">
+
+                    <div class="form-group col-md-4">
+                        <form action="{{route('userKRdetail')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input value="{{$Object}}" type="hidden" class="form-control" name="Object">
+                            <select id="client_id" type="dropdown-toggle" class="form-control" name="mount">
+                                <optgroup>
+                                    <option value="1" {{ $mount == 1 ? 'selected' : '' }}>มกราคม</option>
+                                    <option value="2" {{ $mount == 2 ? 'selected' : '' }}>กุมภาพันธ์</option>
+                                    <option value="3" {{ $mount == 3 ? 'selected' : '' }}>มีนาคม</option>
+                                    <option value="4" {{ $mount == 4 ? 'selected' : '' }}>เมษายน</option>
+                                    <option value="5" {{ $mount == 5 ? 'selected' : '' }}>พฤษภาคม</option>
+                                    <option value="6" {{ $mount == 6 ? 'selected' : '' }}>มิถุนายน</option>
+                                    <option value="7" {{ $mount == 7 ? 'selected' : '' }}>กรกฎาคม</option>
+                                    <option value="8" {{ $mount == 8 ? 'selected' : '' }}>สิงหาคม</option>
+                                    <option value="9" {{ $mount == 9 ? 'selected' : '' }}>กันยายน</option>
+                                    <option value="10" {{ $mount == 10 ? 'selected' : '' }}>ตุลาคม</option>
+                                    <option value="11" {{ $mount == 11 ? 'selected' : '' }}>พฤศจิกายน</option>
+                                    <option value="12" {{ $mount == 12 ? 'selected' : '' }}>ธันวาคม</option>
+                                </optgroup>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                @foreach ($userKR as $data)
+                <div class="row">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h class="card-title">{{$data->nameKR}}</h4>
+                                    <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">ผล</label>
+                                            <input type="text" class="form-control" name="result" id="exampleInputName1" placeholder="คำบรรยาย" value="{{$data->result}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail3">ร้อยละผลสำเร็จ</label>
+                                            <input type="text" class="form-control" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}">
+                                        </div>
+                                        <div class=" form-group">
+                                            <label for="exampleInputPassword4">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label>
+                                            <input type="text" class="form-control" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" value="{{$data->future_result}}">
+                                            <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" value="{{$data->idKRdetail}}">
+                                        </div>
+                                        <div class=" form-group">
+                                            <label> อัปโหลดหลักฐาน</label>
+                                            <input type="file" name="img[]" class="file-upload-default">
+                                            <div class="input-group col-xs-12">
+                                                <input type="text" class="form-control file-upload-info" disabled="" placeholder="อัปโหลไฟล์">
+                                                <span class="input-group-append">
+                                                    <button class="file-upload-browse btn btn-gradient-primary" type="button">อัปโหลด</button>
+                                                </span>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail3">ร้อยละผลสำเร็จ</label>
-                                                <input type="text" class="form-control" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}">
-                                            </div>
-                                            <div class=" form-group">
-                                                <label for="exampleInputPassword4">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label>
-                                                <input type="text" class="form-control" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" value="{{$data->future_result}}">
-                                                <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" value="{{$data->idKRdetail}}">
-                                            </div>
-                                            <div class=" form-group">
-                                                <label> อัปโหลดหลักฐาน</label>
-                                                <input type="file" name="img[]" class="file-upload-default">
-                                                <div class="input-group col-xs-12">
-                                                    <input type="text" class="form-control file-upload-info" disabled="" placeholder="อัปโหลไฟล์">
-                                                    <span class="input-group-append">
-                                                        <button class="file-upload-browse btn btn-gradient-primary" type="button">อัปโหลด</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div style="text-align:right">
-                                                <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
-                                                <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
-                                            </div>
-                                        </form>
-                                </div>
-                                @endforeach
+                                        </div>
+                                        <div style="text-align:right">
+                                            <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
+                                            <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
+                                        </div>
+                                    </form>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <!-- Modal DELETE -->
-                <!-- Modal DELETE -->
-                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
-                                <hr>
-                                <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
-                                <form class="forms-sample" action="{{route('deletekr')}}" method="post">
-                                    @csrf
-                                    <input id="object_delete_id" type="hidden" class="form-control" name="delete_keyobject">
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
-                                        <button type="submit" class="btn btn-gradient-danger">ลบ</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- partial:../../partials/_footer.html -->
-                <footer class="footer">
-                    <div class="container-fluid clearfix">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates </a> from Bootstrapdash.com</span>
-                    </div>
-                </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
+            <!-- Modal DELETE -->
+            <!-- Modal DELETE -->
+            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
+                            <hr>
+                            <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
+                            <form class="forms-sample" action="{{route('deletekr')}}" method="post">
+                                @csrf
+                                <input id="object_delete_id" type="hidden" class="form-control" name="delete_keyobject">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
+                                    <button type="submit" class="btn btn-gradient-danger">ลบ</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partial:../../partials/_footer.html -->
+            <footer class="footer">
+                <div class="container-fluid clearfix">
+                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates </a> from Bootstrapdash.com</span>
+                </div>
+            </footer>
+            <!-- partial -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
@@ -134,6 +158,10 @@
         function addIdToModal(id) {
             document.getElementById('object_delete_id').value = id;
         };
+        var select = document.getElementById('client_id');
+        select.addEventListener('change', function() {
+            this.form.submit();
+        }, false);
     </script>
 </body>
 
