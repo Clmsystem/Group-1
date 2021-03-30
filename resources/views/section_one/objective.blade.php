@@ -36,11 +36,6 @@
     }
 
 
-    .dropdown .dropdown-menu .dropdown-item {
-        font-size: 0.8rem;
-        padding: 0;
-    }
-
     /* adjust btn position */
     .button-position {
         float: right;
