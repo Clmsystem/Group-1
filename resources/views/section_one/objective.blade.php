@@ -97,8 +97,10 @@
                     <input type="hidden" name="id" value="{{$data->KR_idKR}}">
                     <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i> ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                   </div>
-                  <div class="col-lg-6 grid-margin stretch-card">
-                    <select name="employee[]" id="emp2" class="form-control selectpicker"data-live-search="true" multiple>
+                  <div class="form-group">
+                  <label for="emp2">เลือกผู้รับผิดชอบ</label>
+                  <div class="col-lg-12 grid-margin stretch-card">
+                    <select name="employee[]" id="emp2" class="form-control selectpicker" data-live-search="true" multiple>
                         @foreach ($employee as $data2)
                           @if($autrority->count()>0)
                             @foreach ($autrority as $data3)
@@ -118,6 +120,7 @@
                           @endif
                         @endforeach  
                       </select >
+                      </div>
                   </div>
                     <br/>
                     <br/>

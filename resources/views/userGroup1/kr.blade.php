@@ -38,7 +38,7 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
-                        <h3 class="page-title">ตัวชี้วัดตามคำรับรอง </h3>
+                        <h3 class="page-title">เป้าหมายตามคำรับรองของ </h3>
                     </div>
 
                     <div class="form-group col-md-4">
@@ -63,18 +63,17 @@
                             </select>
                         </form>
                     </div>
-                </div>
                 @foreach ($userKR as $data)
-                <div class="row">
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h class="card-title">{{$data->nameKR}}</h4>
+                                <h4 class="card-title">{{$data->nameKR}}<span><p style="text-align:right" ><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p></span></h4>
                                     <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="exampleInputName1">ผล</label>
-                                            <input type="text" class="form-control" name="result" id="exampleInputName1" placeholder="คำบรรยาย" value="{{$data->result}}">
+                                            <label for="exampleInputName1" >ผล</label>
+                                            <textarea id="exampleInputName1" class="form-control" name="result" placeholder="คำบรรยาย" rows="3">{{$data->result}}</textarea>
+
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail3">ร้อยละผลสำเร็จ</label>
@@ -82,7 +81,7 @@
                                         </div>
                                         <div class=" form-group">
                                             <label for="exampleInputPassword4">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label>
-                                            <input type="text" class="form-control" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" value="{{$data->future_result}}">
+                                            <textarea class="form-control" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" rows="3">{{$data->future_result}}</textarea>
                                             <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" value="{{$data->idKRdetail}}">
                                         </div>
                                         <div class=" form-group">
@@ -101,12 +100,10 @@
                                         </div>
                                     </form>
                             </div>
-                            @endforeach
                         </div>
                     </div>
+                    @endforeach
                 </div>
-            </div>
-            <!-- Modal DELETE -->
             <!-- Modal DELETE -->
             <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -134,6 +131,7 @@
                     <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates </a> from Bootstrapdash.com</span>
                 </div>
             </footer>
+            </div>
             <!-- partial -->
         </div>
         <!-- main-panel ends -->

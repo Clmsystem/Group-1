@@ -15,7 +15,7 @@ class Kr extends Controller
         $kr = DB::table('kr')
             ->join('krdetail', 'kr.idKR', 'krdetail.KR_idKR')
             ->select('kr.nameKR', 'krdetail.*')->where('kr.object_idobject', '=', $id)->where('krdetail.mount', 1)->paginate(5);
-        $employee = DB::table('employee')->where('id_department', '=', 2)->get();
+        $employee = DB::table('employee')->get();
         $autrority = DB::table('autrority')->get();
         $max = DB::table('autrority')->max('idautrority');
         // dd($autrority, $max);

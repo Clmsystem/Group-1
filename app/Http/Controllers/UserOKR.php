@@ -10,9 +10,9 @@ class UserOKR extends Controller
     public function index($idUser)
     {
         $userObject = DB::table('object')
-            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+            ->join('kr', 'object.idobject', '=', 'kr.object_idobject')
             // ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
-            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+            ->join('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
             ->where('autrority.Employee_id_employee', '=', $idUser)
             ->get();
         $mount = (int)date('m');
