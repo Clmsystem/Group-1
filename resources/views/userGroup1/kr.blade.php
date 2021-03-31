@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Purple User</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -24,6 +24,46 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+
+    /* adjust font this page */
+    .newFont {
+        font-family: 'Mitr', sans-serif;
+    }
+
+    .newFonts {
+        font-family: 'Mitr', sans-serif;
+        font-size: 50px !important;
+    }
+
+
+    .dropdown .dropdown-menu .dropdown-item {
+        font-size: 0.8rem;
+        padding: 0;
+    }
+
+    /* adjust btn position */
+    .button-position {
+        float: right;
+        margin: -8px;
+    }
+
+
+
+    td.break {
+        word-wrap: break-word;
+        /* word-break: break-all; */
+        white-space: normal;
+    }
+
+
+    /* adjust btn size */
+    .btns {
+        padding: 0.9rem 2em;
+        font-size: 0.875rem;
+    }
+</style>
 </head>
 
 <body>
@@ -37,16 +77,18 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
+                <h1 class="text-info mdi mdi-face  newFont" > ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}} </h1><br>
                     <div class="page-header">
-                        <h3 class="page-title">เป้าหมายตามคำรับรองของ </h3>
-                    </div>
+                    
+                        <h2 class=" mdi mdi-arrow-right-drop-circle newFont ">       เป้าหมายตามคำรับรองของ </h2>
+                  
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <form action="{{route('userKRdetail')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input value="{{$Object}}" type="hidden" class="form-control" name="Object">
-                            <select id="client_id" type="dropdown-toggle" class="form-control" name="mount">
-                                <optgroup>
+                            <input value="{{$Object}}" type="hidden" class="form-control newFont" name="Object">
+                            <select id="client_id" type="dropdown-toggle" class="form-control newFont" name="mount">
+                                <optgroup class="newFont">
                                     <option value="1" {{ $mount == 1 ? 'selected' : '' }}>มกราคม</option>
                                     <option value="2" {{ $mount == 2 ? 'selected' : '' }}>กุมภาพันธ์</option>
                                     <option value="3" {{ $mount == 3 ? 'selected' : '' }}>มีนาคม</option>
@@ -63,40 +105,43 @@
                             </select>
                         </form>
                     </div>
+                    </div>
                 @foreach ($userKR as $data)
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">{{$data->nameKR}}<span><p style="text-align:right" ><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p></span></h4>
+                                <h4 class="card-title">{{$data->nameKR}}<span><p style="text-align:right" ><a href="#" class="card-description"><i class="mdi mdi-clipboard-text "></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p></span></h4>
                                     <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="exampleInputName1" >ผล</label>
-                                            <textarea id="exampleInputName1" class="form-control" name="result" placeholder="คำบรรยาย" rows="3">{{$data->result}}</textarea>
+                                            <label for="exampleInputName1 "class= "newFont" >ผล</label><br>
+                                            <textarea id="exampleInputName1" class="form-control newFont" name="result" placeholder="คำบรรยาย" rows="3">{{$data->result}}</textarea>
 
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail3">ร้อยละผลสำเร็จ</label>
-                                            <input type="text" class="form-control" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}">
+                                            <label for="exampleInputEmail3"class= "newFont">ร้อยละผลสำเร็จ</label><br>
+                                            <input type="text" class="form-control newFont" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}">
                                         </div>
                                         <div class=" form-group">
-                                            <label for="exampleInputPassword4">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label>
-                                            <textarea class="form-control" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" rows="3">{{$data->future_result}}</textarea>
-                                            <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" value="{{$data->idKRdetail}}">
+                                            <label for="exampleInputPassword4"class= "newFont">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label><br>
+                                            <textarea class="form-control newFont" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" rows="3">{{$data->future_result}}</textarea>
+                                            <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" class= "newFont" value="{{$data->idKRdetail}}">
                                         </div>
                                         <div class=" form-group">
-                                            <label> อัปโหลดหลักฐาน</label>
+                                            <label class= "newFont"> อัปโหลดหลักฐาน</label><br>
                                             <input type="file" name="img[]" class="file-upload-default">
                                             <div class="input-group col-xs-12">
-                                                <input type="text" class="form-control file-upload-info" disabled="" placeholder="อัปโหลไฟล์">
+                                                <input type="text" class="form-control file-upload-info newFont" disabled="" placeholder="อัปโหลไฟล์">
                                                 <span class="input-group-append">
-                                                    <button class="file-upload-browse btn btn-gradient-primary" type="button">อัปโหลด</button>
+                                                    <button class="file-upload-browse btn btn-warning mdi mdi-folder-upload newFont" type="button" >   อัปโหลด</button>
                                                 </span>
                                             </div>
                                         </div>
                                         <div style="text-align:right">
-                                            <button type="submit" class="btn btn-gradient-primary mr-2">บันทึก</button>
-                                            <button type="reset" class="btn btn-gradient-light">ยกเลิก</button>
+                                            <button type="submit" class="btn btn-success btn-fw mdi mdi-content-save-all newFont">   บันทึก</button>
+                                            
+                                            <button type="reset" class="btn btn-danger btn-fw  mdi mdi-delete-forever newFont">  ยกเลิก</button>
+                                            
                                         </div>
                                     </form>
                             </div>
