@@ -122,7 +122,7 @@
                     <p style="text-align:right">
                       <button type="submit" class="btn btn-success btn-fw mr-2 mdi mdi-content-save-all newFont"> บันทึก</button>
                       <button type="reset" class="btn btn-gradient-light newFont">ยกเลิก</button>
-                      <button class="btn btn-danger ml-4 mdi mdi-delete-forever newFont" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});"> ลบ</button>
+                      <button type="button" class="btn btn-danger ml-4 mdi mdi-delete-forever newFont" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});"> ลบ</button>
                     </p>
                 </form>
               </div>
