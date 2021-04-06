@@ -15,11 +15,13 @@ class Kr extends Controller
         $kr = DB::table('kr')
             ->join('krdetail', 'kr.idKR', 'krdetail.KR_idKR')
             ->select('kr.nameKR', 'krdetail.*')->where('kr.object_idobject', '=', $id)->where('krdetail.mount', 1)->paginate(5);
+        $objectName = DB::table('object')
+            ->select('nameObject')->where('idobject', '=', $id)->get();
         $employee = DB::table('employee')->get();
         $autrority = DB::table('autrority')->get();
         $max = DB::table('autrority')->max('idautrority');
         // dd($autrority, $max);
-        return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max'));
+        return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max', 'objectName'));
     }
     public function addKR(Request $request)
     {

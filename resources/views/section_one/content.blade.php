@@ -119,8 +119,6 @@
                       </div>
                     </div>
                   </div>
-                    
-               
                   <table class="table">
                       <thead>
                         <tr>
@@ -136,30 +134,37 @@
                               <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success newFont">{{$data->nameObject}}<span> (สมบูรณ์แล้ว)</span></a></td>
                               <td style="text-align:right">
                                 <button class="btn btn-warning btn-md" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}}, '{{$data->nameObject}})';"> แก้ไข</button>
-                                @foreach($obkr as $data2)
-                                  @if ($data->idobject==$data2->object_idobject) 
-                                    @break
-                                  @elseif ($data2->idKR==$max) 
-                                    <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
-                                  
-                                  @endif     
-                                @endforeach
+                                @if(count($obkr)>0)
+                                  @foreach($obkr as $data2)
+                                    @if ($data->idobject==$data2->object_idobject) 
+                                      @break
+                                    @elseif ($data2->idKR==$max) 
+                                      <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                    @endif     
+                                  @endforeach
+                                @else
+                                  <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                @endif
                               </td>
                             </tr>
                             @else
                             <tr>
-                            <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-dark newFont">{{$data->nameObject}}</a></td>
-                            <td style="text-align:right">
-                                <button class="btn btn-warning btn-md mdi mdi-lead-pencil" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}');"> แก้ไข</button>
-                                @foreach($obkr as $data2)
-                                  @if ($data->idobject==$data2->object_idobject) 
-                                    @break
-                                  @elseif ($data2->idKR==$max) 
-                                    <button class="btn btn-danger btn-md ml-4 mdi mdi-delete-forever" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
-                                  
-                                  @endif     
-                                @endforeach
-                            </td>
+                              <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-dark newFont">{{$data->nameObject}}</a></td>
+                              <td style="text-align:right">
+                                  <button class="btn btn-warning btn-md mdi mdi-lead-pencil" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}');"> แก้ไข</button>
+                                  @if(count($obkr)>0)
+                                    @foreach($obkr as $data2)
+                                      @if ($data->idobject==$data2->object_idobject) 
+                                        @break
+                                      @elseif ($data2->idKR==$max) 
+                                        <button class="btn btn-danger btn-md ml-4 mdi mdi-delete-forever" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                      
+                                      @endif     
+                                    @endforeach
+                                  @else
+                                    <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                  @endif
+                              </td>
                             </tr>
                             @endif
 

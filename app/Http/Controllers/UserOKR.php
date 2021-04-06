@@ -30,7 +30,6 @@ class UserOKR extends Controller
             ->where('krdetail.KR_object_idobject', '=', $Object)
             ->where('krdetail.mount', '=', $mount)
             ->get();
-
         return view('userGroup1.kr', compact('userKR', 'mount', 'Object'));
     }
     public function updateKRdetail(Request $request)
@@ -54,7 +53,6 @@ class UserOKR extends Controller
             ->where('krdetail.KR_object_idobject', '=', $Object)
             ->where('krdetail.mount', '=', $mount)
             ->get();
-
         return view('userGroup1.kr', compact('userKR', 'mount', 'Object'));
     }
 }

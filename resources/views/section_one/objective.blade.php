@@ -71,11 +71,11 @@
         <div class="content-wrapper">
         <h1 class="text-success mdi mdi-face newFont" > ยินดีต้อนรับคุณ Admin</h1>
           <div class="page-header">
-            <h3 class="newFont"> เป้าหมายตามคำรับรองของ </h3>
+            <h3 class="newFont"> เป้าหมายตามคำรับรองของ {{$objectName[0]->nameObject}}</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item newFont" aria-current="page">Objective</a></li>
-                <li class="breadcrumb-item active newFont"><a href="/section_one">Key Results</a></li>
+                <li class="breadcrumb-item newFont" aria-current="page"><a href="/section_one">Objective</a></li>
+                <li class="breadcrumb-item active newFont">Key Results</li>
               </ol>
             </nav>
           </div>

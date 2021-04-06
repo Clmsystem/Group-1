@@ -77,16 +77,14 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                <h1 class="text-info mdi mdi-face  newFont" > ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}} </h1><br>
+                <!-- <h1 class="text-info mdi mdi-face  newFont" > ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}}</h1> -->
                     <div class="page-header">
-                    
-                        <h2 class=" mdi mdi-arrow-right-drop-circle newFont ">       เป้าหมายตามคำรับรองของ </h2>
-                  
-
+                    <h2 class=" mdi mdi-arrow-right-drop-circle newFont ">       เป้าหมายตามคำรับรองของ {{$userKR[0]->nameObject}}</h2>
                     <div class="form-group col-md-3">
                         <form action="{{route('userKRdetail')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input value="{{$Object}}" type="hidden" class="form-control newFont" name="Object">
+                            <label class = "newFont" for="mount">เลือกเดือน</label>
                             <select id="client_id" type="dropdown-toggle" class="form-control newFont" name="mount">
                                 <optgroup class="newFont">
                                     <option value="1" {{ $mount == 1 ? 'selected' : '' }}>มกราคม</option>
@@ -120,7 +118,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail3"class= "newFont">ร้อยละผลสำเร็จ</label><br>
-                                            <input type="text" class="form-control newFont" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}">
+                                            <input type="number" class="form-control newFont" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}" min="0" max="100">
                                         </div>
                                         <div class=" form-group">
                                             <label for="exampleInputPassword4"class= "newFont">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label><br>
