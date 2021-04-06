@@ -88,16 +88,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($userObject as $data)
-                                            @if ($data->status==0)
-                                            <tr>
-                                                <td><a href="{{url('/userKr/'.$data->idobject.'/'.$mount)}}" class="text-success mdi mdi-emoticon newFont"> {{$data->nameObject}}</a></td>
-                                            </tr>
-                                            @else
-                                            <tr>
-                                                <td><a href="{{url('/userKr/'.$data->idobject.'/'.$mount)}}" class="text-danger mdi mdi-emoticon-neutral newFont"> {{$data->nameObject}}</a></td>
-                                                @endif
-                                                @endforeach
+                                            @foreach ($uniqueObject as $data)
+                                                @for ($i = 0; $i < count($data); $i++)
+                                                    @if ($data[$i]->status==1)
+                                                        <tr>
+                                                            <td><a href="{{url('/userKr/'.$data[$i]->idobject.'/'.$mount)}}" class="text-danger mdi mdi-emoticon-neutral newFont"> {{$data[$i]->nameObject}}</a></td>
+                                                        </tr>
+                                                        @break
+                                                    @elseif($i+1> count($data))
+                                                        <tr>
+                                                            <td><a href="{{url('/userKr/'.$data[$i]->idobject.'/'.$mount)}}" class="text-success mdi mdi-emoticon newFont"> {{$data[$i]->nameObject}}</a></td>
+                                                        </tr>
+                                                    @endif
+                                                @endfor
+                                            @endforeach
                                         </tbody>
                                     </table>
                                     </form>

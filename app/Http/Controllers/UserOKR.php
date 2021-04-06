@@ -15,8 +15,9 @@ class UserOKR extends Controller
             ->join('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
             ->where('autrority.Employee_id_employee', '=', $idUser)
             ->get();
+        $uniqueObject = $userObject->groupBy("idobject");
         $mount = (int)date('m');
-        return view('userGroup1.object', compact('userObject', 'mount'));
+        return view('userGroup1.object', compact('userObject', 'mount','uniqueObject' ));
     }
     public function userKR($Object, $mount)
     {
