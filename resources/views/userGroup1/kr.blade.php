@@ -113,10 +113,27 @@
                                     </span></h4>
                                 <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}">
                                     @csrf
+                                    @if($data->status_data == 1)
+                                    <div class="form-group">
+                                        <label for="exampleInputName1 " class="newFont">ผล</label><br>
+                                        <textarea id="exampleInputName1" class="form-control newFont" name="result" placeholder="คำบรรยาย" rows="3" readonly>{{$data->result}}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail3" class="newFont">ร้อยละผลสำเร็จ</label><br>
+                                        <input type="number" class="form-control newFont" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}} " min="0" max="100" readonly>
+                                    </div>
+                                    <div class=" form-group">
+                                        <label for="exampleInputPassword4" class="newFont">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label><br>
+                                        <textarea class="form-control newFont" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" rows="3" readonly>{{$data->future_result}}</textarea>
+                                        <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" class="newFont" value="{{$data->idKRdetail}}">
+                                    </div>
+                                    <div>
+                                        <h3 class="mdi  text-danger newFont ">**ไม่สามารถแก้ไขข้อมูลได้ เนื่องจากรายงานผลไปแล้ว**</h3>
+                                    </div>
+                                    @else
                                     <div class="form-group">
                                         <label for="exampleInputName1 " class="newFont">ผล</label><br>
                                         <textarea id="exampleInputName1" class="form-control newFont" name="result" placeholder="คำบรรยาย" rows="3">{{$data->result}}</textarea>
-
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail3" class="newFont">ร้อยละผลสำเร็จ</label><br>
@@ -137,10 +154,10 @@
                                             </span>
                                         </div>
                                     </div>
+                                    @endif
                                     <div style="text-align:right">
-                                        <button type="submit" class="btn btn-success btn-fw mdi mdi-content-save-all newFont"> บันทึก</button>
-
-                                        <button type="reset" class="btn btn-danger btn-fw  mdi mdi-delete-forever newFont"> ยกเลิก</button>
+                                        <button type="submit" class="btn btn-success btn-fw mdi mdi-content-save-all newFont">บันทึก</button>
+                                        <button type="reset" class="btn btn-danger btn-fw  mdi mdi-delete-forever newFont">ยกเลิก</button>
 
                                     </div>
                                 </form>

@@ -50,29 +50,29 @@ class Kr extends Controller
     public function updateKR(Request $request)
     {
         DB::table('kr')
-        ->where('idKR', $request->id)
-        ->update(['nameKR'=> $request->result]);
-        if(!empty($request->employee)){
+            ->where('idKR', $request->id)
+            ->update(['nameKR' => $request->result]);
+        if (!empty($request->employee)) {
             DB::table('autrority')
-            ->where('KR_idKR', $request->id)
-            ->delete();
-            foreach($request->employee as $emp){
+                ->where('KR_idKR', $request->id)
+                ->delete();
+            foreach ($request->employee as $emp) {
                 $data = array();
                 $max = DB::table('autrority')->max('idautrority');
-                $data["idautrority"] = intval($max+1);
+                $data["idautrority"] = intval($max + 1);
                 $data["KR_idKR"] = intval($request->id);
-                $data["Employee_id_employee"] = intval($emp); 
-                $data["Employee_id_position"] = 0; 
+                $data["Employee_id_employee"] = intval($emp);
+                $data["Employee_id_position"] = 0;
                 $data["Employee_id_department"] = 0;
                 DB::table('autrority')->insert($data);
             };
-        }else{
+        } else {
             DB::table('autrority')
-            ->where('KR_idKR', $request->id)
-            ->delete();
+                ->where('KR_idKR', $request->id)
+                ->delete();
         }
 
-        return redirect()->back()->with('success','บันทึกข้อมูลเรียบร้อย');
+        return redirect()->back()->with('success', 'บันทึกข้อมูลเรียบร้อย');
     }
     public function deletekr(Request $request)
     {
@@ -80,5 +80,13 @@ class Kr extends Controller
         DB::table('krdetail')->where('KR_idKR', '=', $request->delete_keyobject)->delete();
         DB::table('kr')->where('idKR', '=', $request->delete_keyobject)->delete();
         return redirect()->back()->with('sucess', 'ลบข้อมูลเรียบร้อย');
+    }
+    public function logKRdetail(Request $request)
+    {
+        DB::table('krdetail')
+            ->where('KR_object_idobject', $request->object)
+            ->where('mount', $request->mountid)
+            ->update(['status_data' => 1]);
+        return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
     }
 }
