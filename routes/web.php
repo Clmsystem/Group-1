@@ -78,3 +78,11 @@ Route::get('/userKr/{id}/{mount}', [UserOKR::class, 'userKR']);
 Route::post('/userKr/updateKr', [UserOKR::class, 'updateKRdetail'])->name('updateKRdetail');
 Route::post('/userKr', [UserOKR::class, 'userKRdetail'])->name('userKRdetail');
 // end Group1
+
+Route::get('/section_four', function () {
+    return view('section_four.selectAdmin');
+})->name('/');
+
+Route::get('/section_five', function () {
+    return view('section_five.addAdmin');
+})->name('/');
