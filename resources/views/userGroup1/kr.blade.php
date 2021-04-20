@@ -87,6 +87,9 @@
                                 <label class="newFont" for="mount">เลือกเดือน</label>
                                 <select id="client_id" type="dropdown-toggle" class="form-control newFont" name="mount">
                                     <optgroup class="newFont">
+                                        <option value="10" {{ $mount == 10 ? 'selected' : '' }}>ตุลาคม</option>
+                                        <option value="11" {{ $mount == 11 ? 'selected' : '' }}>พฤศจิกายน</option>
+                                        <option value="12" {{ $mount == 12 ? 'selected' : '' }}>ธันวาคม</option>
                                         <option value="1" {{ $mount == 1 ? 'selected' : '' }}>มกราคม</option>
                                         <option value="2" {{ $mount == 2 ? 'selected' : '' }}>กุมภาพันธ์</option>
                                         <option value="3" {{ $mount == 3 ? 'selected' : '' }}>มีนาคม</option>
@@ -96,9 +99,6 @@
                                         <option value="7" {{ $mount == 7 ? 'selected' : '' }}>กรกฎาคม</option>
                                         <option value="8" {{ $mount == 8 ? 'selected' : '' }}>สิงหาคม</option>
                                         <option value="9" {{ $mount == 9 ? 'selected' : '' }}>กันยายน</option>
-                                        <option value="10" {{ $mount == 10 ? 'selected' : '' }}>ตุลาคม</option>
-                                        <option value="11" {{ $mount == 11 ? 'selected' : '' }}>พฤศจิกายน</option>
-                                        <option value="12" {{ $mount == 12 ? 'selected' : '' }}>ธันวาคม</option>
                                     </optgroup>
                                 </select>
                             </form>
