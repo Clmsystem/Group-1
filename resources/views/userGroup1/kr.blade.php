@@ -130,6 +130,7 @@
                                     <div>
                                         <h3 class="mdi  text-danger newFont ">**ไม่สามารถแก้ไขข้อมูลได้ เนื่องจากรายงานผลไปแล้ว**</h3>
                                     </div>
+
                                     @else
                                     <div class="form-group">
                                         <label for="exampleInputName1 " class="newFont">ผล</label><br>
@@ -154,12 +155,12 @@
                                             </span>
                                         </div>
                                     </div>
-                                    @endif
                                     <div style="text-align:right">
                                         <button type="submit" class="btn btn-success btn-fw mdi mdi-content-save-all newFont">บันทึก</button>
                                         <button type="reset" class="btn btn-danger btn-fw  mdi mdi-delete-forever newFont">ยกเลิก</button>
-
                                     </div>
+                                    @endif
+
                                 </form>
                             </div>
                         </div>
