@@ -81,7 +81,7 @@
                     <div class="page-header">
                         <h2 class=" mdi mdi-arrow-right-drop-circle newFont "> test</h2>
                         <div class="form-group col-md-3">
-                            <form action="{{route('userKRdetail')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('searchKRdetail')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input value="{{$Object}}" type="hidden" class="form-control newFont" name="Object">
                                 <label class="newFont" for="mount">เลือกเดือน</label>
@@ -114,31 +114,36 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputName1 " class="newFont">ผล</label><br>
-                                    <h3 class="snewFont">{{$data->result}}</h3>
-
+                                    <h3></h3>
+                                    @if($data->result== null)
+                                    <h6 class="newFont">**********ยังไม่กรอกข้อมูล**********</h6>
+                                    @else
+                                    <h6 class="newFont">{{$data->result}}</h6>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail3" class="newFont">ร้อยละผลสำเร็จ</label><br>
-                                    <input type="number" class="form-control newFont" name="percent" id="exampleInputEmail3" placeholder="ตัวเลข/เปอร์เซ็นต์" value="{{$data->percent}}" min="0" max="100">
+                                    <h3></h3>
+                                    @if($data->percent== null)
+                                    <h6 class="newFont">**********ยังไม่กรอกข้อมูล**********</h6>
+                                    @else
+                                    <h6 class="newFont">{{$data->percent}}</h6>
+                                    @endif
+
                                 </div>
                                 <div class=" form-group">
                                     <label for="exampleInputPassword4" class="newFont">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</label><br>
-                                    <textarea class="form-control newFont" name="future_result" id="exampleInputPassword4" placeholder="คำอธิบาย" rows="3">{{$data->future_result}}</textarea>
-                                    <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" class="newFont" value="{{$data->idKRdetail}}">
-                                </div>
-                                <div class=" form-group">
-                                    <label class="newFont"> อัปโหลดหลักฐาน</label><br>
-                                    <input type="file" name="img[]" class="file-upload-default">
-                                    <div class="input-group col-xs-12">
-                                        <input type="text" class="form-control file-upload-info newFont" disabled="" placeholder="อัปโหลไฟล์">
-                                        <span class="input-group-append">
-                                            <button class="file-upload-browse btn btn-warning mdi mdi-folder-upload newFont" type="button"> อัปโหลด</button>
-                                        </span>
-                                    </div>
+                                    <h3></h3>
+                                    @if($data->future_result== null)
+                                    <h6 class="newFont">**********ยังไม่กรอกข้อมูล**********</h6>
+                                    @else
+                                    <h6 class="newFont">{{$data->future_result}}</h6>
+                                    @endif
+
                                 </div>
                                 <div style="text-align:right">
-                                    <button type="submit" class="btn btn-success btn-fw mdi mdi-content-save-all newFont">บันทึก</button>
-                                    <button type="reset" class="btn btn-danger btn-fw  mdi mdi-delete-forever newFont">ยกเลิก</button>
+                                    <a href="/{{$data->KR_idKR}}"><button class="btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline"> รายงานผล </button></a>
+
                                 </div>
 
                             </div>
@@ -147,25 +152,7 @@
                     @endforeach
                 </div>
                 <!-- Modal DELETE -->
-                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h3 class="modal-title newFont" id="exampleModalLabel1">ลบเป้าหมายตามคำรับรอง</h3>
-                                <hr>
-                                <h5 class="newFont"> ยืนยันที่จะลบ ตัวชี้วัดตามคำรับรอง นี้หรือไม่ ? </h5>
-                                <form class="forms-sample" action="{{route('deletekr')}}" method="post">
-                                    @csrf
-                                    <input id="object_delete_id" type="hidden" class="form-control" name="delete_keyobject">
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
-                                        <button type="submit" class="btn btn-gradient-danger">ลบ</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- partial:../../partials/_footer.html -->
                 <footer class="footer">
                     <div class="container-fluid clearfix">

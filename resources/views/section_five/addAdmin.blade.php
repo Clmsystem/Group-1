@@ -84,7 +84,7 @@
                     </div>
                   </div>
                     
-                                <table class="table">
+                     <table class="table">
                       <thead>
                         <tr>
                           <h5 class = newFont>ตัวชี้วัดตามคำรับรอง</h5>
@@ -92,15 +92,13 @@
                         </tr>
                         
                       </thead>
-                      <tbody>
+                      <tbody>  
+                      @foreach ($ob as $data)
                             <tr>
-                              <td><a href="" class="text-success newFont"><span> ..........</span></a></td>
-
+                              <td><a href="{{url('/section_five/'.$data->idobject)}}" class="text-dark newFont"> {{$data->nameObject}}</a></td>
                             </tr>
-                            <tr>
-                            <td><a href="" class="text-dark newFont"></a></td>
-
-                            </tr>
+                           
+                      @endforeach
                       </tbody>
                     </table>
                   </div>

@@ -13,6 +13,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\Kr;
 use App\Http\Controllers\ObjectGroup1;
 use App\Http\Controllers\UserOKR;
+use App\Http\Controllers\Showobject;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +65,7 @@ Route::get('file/download', [FileUploadController::class, 'getfile']);
 Route::get('/section_one', [ObjectGroup1::class, 'index']);
 Route::get('/section_one/{year}', [ObjectGroup1::class, 'year']);
 Route::get('/section_one/{year}/{id}', [Kr::class, 'index']);
+Route::get('/section_five', [Showobject::class, 'show']);
 Route::post('/section_one/addKR', [Kr::class, 'addKR'])->name('addKR');
 Route::post('/section_one/add', [ObjectGroup1::class, 'addObject'])->name('addobject');
 Route::post('/section_one/updateKR', [Kr::class, 'updateKR'])->name('updateKR');
@@ -85,10 +87,10 @@ Route::get('/section_four', function () {
     return view('section_four.selectAdmin');
 })->name('/');
 
-Route::get('/section_five', function () {
-    return view('section_five.addAdmin');
-})->name('/');
+
 
 Route::get('/search',  [UserOKR::class, 'search']);
 Route::post('/searchYear',  [UserOKR::class, 'searchyear']);
 Route::get('/searchKR/{id}',  [UserOKR::class, 'searchKR']);
+Route::post('/searchKrdetail', [UserOKR::class, 'searchKrdetail'])->name('searchKRdetail');
+Route::get('/{id}',  [UserOKR::class, 'dashbord']);
