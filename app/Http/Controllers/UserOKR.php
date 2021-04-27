@@ -115,4 +115,14 @@ class UserOKR extends Controller
         $mount = $request->mount;
         return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
     }
+    public function dashbord($id)
+    {
+
+        $dataKR = DB::table('krdetail')
+            ->where('KR_idKR', '=', $id)
+            ->select('percent', 'mount')
+            ->get();
+
+        return view('userGroup1.dashbord', compact('dataKR'));
+    }
 }

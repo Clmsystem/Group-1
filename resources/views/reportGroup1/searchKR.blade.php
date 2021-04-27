@@ -142,7 +142,7 @@
 
                                 </div>
                                 <div style="text-align:right">
-                                    <button class="btn btn-success btn-fw mdi mdi-content-save-all newFont">รายงานผล</button>
+                                    <a href="/{{$data->KR_idKR}}"><button class="btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline"> รายงานผล </button></a>
 
                                 </div>
 
