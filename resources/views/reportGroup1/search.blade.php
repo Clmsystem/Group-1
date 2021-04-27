@@ -69,6 +69,8 @@
             <!-- partial:../../partials/_sidebar.html -->
             @include('partials.sidebar')
             <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -98,6 +100,14 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+                        
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
                         <div class="row">
                             <table class="table">
                                 <thead>
@@ -115,14 +125,15 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
+                        </div>                 
                     </div>
                 </div>
-
             </div>
 
             <!-- page-body-wrapper ends -->
+        
         </div>
+    </div>
 
         <!-- container-scroller -->
         <!-- plugins:js -->
