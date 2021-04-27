@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class Kr extends Controller
 {
-    public function index($id)
+    public function index($year,$id)
     {
         $data = Session::put('id', $id);
         $kr = DB::table('kr')
@@ -20,8 +20,9 @@ class Kr extends Controller
         $employee = DB::table('employee')->get();
         $autrority = DB::table('autrority')->get();
         $max = DB::table('autrority')->max('idautrority');
+        $flag = DB::table('year')->where('year',$year)->value('flag');
         // dd($autrority, $max);
-        return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max', 'objectName'));
+        return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max', 'objectName','flag'));
     }
     public function addKR(Request $request)
     {

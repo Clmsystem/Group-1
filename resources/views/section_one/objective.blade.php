@@ -79,7 +79,12 @@
               </ol>
             </nav>
           </div>
-          <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus newFont" data-toggle="modal" data-target="#modalAddKR"> เพิ่มเป้าหมายตามคำรับรอง</button></p>
+          @if($flag == 0)
+            <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-secondary mdi mdi-library-plus newFont" data-toggle="modal" data-target="#modalAddKR" disabled> เพิ่มเป้าหมายตามคำรับรอง</button></p>
+          @else
+            <p class="mr-3" style="text-align:right"><button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus newFont" data-toggle="modal" data-target="#modalAddKR"> เพิ่มเป้าหมายตามคำรับรอง</button></p>
+          @endif
+
           @foreach ($kr as $data)
           <div class="col-12 grid-margin stretch-card">
             <div class="card">
@@ -88,14 +93,14 @@
                   @csrf
                   <div class="form-group newFont">
                     <label for="keyResult ">เป้าหมายตามคำรับรอง</label>
-                    <input type="text" class="form-control newFont" name="result" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}">
+                    <input type="text" class="form-control newFont" name="result" placeholder="เป้าหมายตามคำรับรอง" value="{{$data->nameKR}}" @if($flag == 0) disabled @endif>
                     <input type="hidden" name="id" value="{{$data->KR_idKR}}">
                     <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text"></i> ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                   </div>
                   <div class="form-group">
                   <label for="emp2">เลือกผู้รับผิดชอบ</label>
                   <div class="col-lg-12 grid-margin stretch-card">
-                    <select name="employee[]" id="emp2" class="form-control selectpicker" data-live-search="true" multiple>
+                    <select name="employee[]" id="emp2" class="form-control selectpicker" data-live-search="true" multiple @if($flag == 0) disabled @endif>
                         @foreach ($employee as $data2)
                           @if($autrority->count()>0)
                             @foreach ($autrority as $data3)
@@ -120,9 +125,9 @@
                     <br/>
                     <br/>
                     <p style="text-align:right">
-                      <button type="submit" class="btn btn-success btn-fw mr-2 mdi mdi-content-save-all newFont"> บันทึก</button>
-                      <button type="reset" class="btn btn-gradient-light newFont">ยกเลิก</button>
-                      <button type="button" class="btn btn-danger ml-4 mdi mdi-delete-forever newFont" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});"> ลบ</button>
+                      <button type="submit" class="btn btn-success btn-fw mr-2 mdi mdi-content-save-all newFont" @if($flag == 0) disabled @endif> บันทึก</button>
+                      <button type="reset" class="btn btn-gradient-light newFont" @if($flag == 0) disabled @endif>ยกเลิก</button>
+                      <button type="button" class="btn btn-danger ml-4 mdi mdi-delete-forever newFont" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->KR_idKR}});" @if($flag == 0) disabled @endif> ลบ</button>
                     </p>
                 </form>
               </div>

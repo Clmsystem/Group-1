@@ -9,11 +9,16 @@ class ObjectGroup1 extends Controller
 {
     public function index()
     {
-        $ob = DB::table('object')->get();
+        $allyear = DB::table('year')->get();
+        $currentyear = DB::table('year')->max('year');
+        $currentyearid = DB::table('year')->max('year_id');
+        $flag = DB::table('year')->where('year_id',$currentyearid)->value('flag');
+        $ob = DB::table('year')
+            ->join('object', 'year.year_id', '=', 'object.year_year_id')
+            ->where('year', '=', $currentyear)->get();
         $obkr = DB::table('kr')->get();
         $max = DB::table('kr')->max('idKR');
-        //dd($ob, $obkr, $max);
-        return view('section_one.content', compact('ob', 'obkr', 'max'));
+        return view('section_one.content', compact('ob', 'obkr', 'max','currentyearid','allyear','currentyear','flag'));
     }
     public function addObject(Request $request)
     {
@@ -22,7 +27,7 @@ class ObjectGroup1 extends Controller
         $data = array();
         $data["nameObject"] = $request->keyobject;
         $data["status"] = 1;
-        $data["year_year_id"] = 2564;
+        $data["year_year_id"] = $request->yearobject;
         $data["idobject"] = $id + 1;
 
         DB::table('object')->insert($data);
@@ -30,12 +35,25 @@ class ObjectGroup1 extends Controller
     }
     public function deleteObject(Request $request)
     {
-        DB::table('object')->where('idobject', '=', $request->delete_keyobject)->delete();
+        DB::table('object')->where('idobject', '=', $request->delete_keyobject)->where('year_year_id','=',$request->year_object)->delete();
         return redirect()->back()->with('sucess', 'ลบข้อมูลเรียบร้อย');
     }
     public function editObject(Request $request)
     {
-        DB::table('object')->where('idobject', $request->keyobject)->update(['nameObject' => $request->nameobject]);
+        DB::table('object')->where('idobject', $request->keyobject)->where('year_year_id', $request->yearobject)->update(['nameObject' => $request->nameobject]);
         return redirect()->back()->with('sucess', 'แก้ไขข้อมูลเรียบร้อย');
+    }
+    public function year($year)
+    {
+        $allyear = DB::table('year')->get();
+        $currentyear = $year;
+        $currentyearid = DB::table('year')->where('year',$currentyear)->value('year_id');
+        $ob = DB::table('year')
+            ->join('object', 'year.year_id', '=', 'object.year_year_id')
+            ->where('year', '=', $currentyear)->get();
+        $obkr = DB::table('kr')->get();
+        $max = DB::table('kr')->max('idKR');
+        $flag = DB::table('year')->where('year_id',$currentyearid)->value('flag');
+        return view('section_one.content', compact('ob', 'obkr', 'max','currentyearid','allyear','currentyear','flag'));
     }
 }

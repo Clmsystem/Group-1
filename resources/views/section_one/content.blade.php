@@ -79,90 +79,72 @@
                 <div class="card">
                   <div class="card-body">
                   <div class="row">
-                  <div class="col-md-12">
-                    <div class="text-right">
-                    <!-- <div class="col-md-6 text-left"> -->
-                      
-                      <!-- <button type="button" class="btn btn-outline-primary" onclick="myFunction()">2564</button> -->
-                      <!-- <div class="input-group-prepend show">
-                          <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown</button>
-                          <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 46px, 0px);">
-                            <a class="dropdown-item" href="#">มกราคม</a>
-                            <a class="dropdown-item" href="#">กุมภาพันธ์</a>
-                            <a class="dropdown-item" href="#">มีนาคม</a>
-                            <a class="dropdown-item" href="#">เมษายน</a>
-                            <a class="dropdown-item" href="#">พฤษภาคม</a>
-                            <a class="dropdown-item" href="#">มิถุนายน</a>
-                            <a class="dropdown-item" href="#">กรกฎาคม</a>
-                            <a class="dropdown-item" href="#">สิงหาคม</a>
-                            <a class="dropdown-item" href="#">กันยายน</a>
-                            <a class="dropdown-item" href="#">ตุลาคม</a>
-                            <a class="dropdown-item" href="#">พฤศจิกายน</a>
-                            <a class="dropdown-item" href="#"></a>
-                          <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                      </div> -->
-                      <!-- <div class="form-group row">
-                            <label class="col-sm-3 col-form-label newFont">Country</label>
-                            <div class="col-sm-9">
-                              <select class="form-control newFont">
-                                <option>America</option>
-                                <option>Italy</option>
-                                <option>Russia</option>
-                                <option>Britain</option>
-                              </select>
-                            </div>
-                          </div> -->
-                    <!-- </div> -->
-                      <button class="btn btn-gradient-success btn-md ml-3 mdi mdi-lock" > Admin</button>
-                      <button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus  newFont"  data-toggle="modal" data-target="#modalAction"> เพิ่มตัวชี้วัดตามคำรับรอง</button>
-                      </div>
+                    <div class="col-8" style="float:none;margin:auto;">
+                      @csrf
+                      <select type="dropdown-toggle" class="form-control newFont" onchange="location = '/section_one/'+this.value;">
+                          <optgroup class="newFont">
+                          <option value="" disabled>เลือกปีงบประมาณ</option>
+                          @foreach ($allyear as $years)
+                              @if($currentyearid == $years->year_id)
+                                <option value="{{$years->year}}" selected>{{$years->year}}</option>
+                              @else
+                                <option value="{{$years->year}}">{{$years->year}}</option>
+                              @endif
+                          @endforeach
+                          </optgroup>
+                      </select>
+                    </div>
+                    <div class="col-4" style="float:none;margin:auto;">
+                        <button class="btn btn-gradient-success btn-md ml-3 mdi mdi-lock" > Admin</button>
+                        @if ($flag==0)
+                          <button class="btn btn-lg btn-secondary mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction" disabled> เพิ่มตัวชี้วัดตามคำรับรอง</button>
+                        @else
+                          <button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction"> เพิ่มตัวชี้วัดตามคำรับรอง</button>
+                        @endif
                     </div>
                   </div>
                   <table class="table">
                       <thead>
-                        <tr>
-                          <h5 class = newFont>ตัวชี้วัดตามคำรับรอง</h5>
+                        <th><h5 class = newFont>ตัวชี้วัดตามคำรับรอง</h5></th>
                         <th></th>
-                        </tr>
                         
                       </thead>
                       <tbody>
                         @foreach ($ob as $data)
-                            @if ($data->status==0)
+                            @if ($flag==0)
                             <tr>
-                              <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-success newFont">{{$data->nameObject}}<span> (สมบูรณ์แล้ว)</span></a></td>
+                              <td><a href="{{url('/section_one/'.$currentyear.'/'.$data->idobject)}}" class="text-dark newFont">{{$data->nameObject}}</a></td>
                               <td style="text-align:right">
-                                <button class="btn btn-warning btn-md" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}}, '{{$data->nameObject}})';"> แก้ไข</button>
+                                <button class="btn btn-secondary btn-md" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}}, '{{$data->nameObject}})',{{$currentyearid}};" disabled> แก้ไข</button>
                                 @if(count($obkr)>0)
                                   @foreach($obkr as $data2)
                                     @if ($data->idobject==$data2->object_idobject) 
                                       @break
                                     @elseif ($data2->idKR==$max) 
-                                      <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                      <button class="btn btn-secondary btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}},{{$currentyearid}});" disabled> ลบ</button>
                                     @endif     
                                   @endforeach
                                 @else
-                                  <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                  <button class="btn btn-secondary btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}},{{$currentyearid}});" disabled> ลบ</button>
                                 @endif
                               </td>
                             </tr>
                             @else
                             <tr>
-                              <td><a href="{{url('/section_one/'.$data->idobject)}}" class="text-dark newFont">{{$data->nameObject}}</a></td>
+                              <td><a href="{{url('/section_one/'.$currentyear.'/'.$data->idobject)}}" class="text-dark newFont">{{$data->nameObject}}</a></td>
                               <td style="text-align:right">
-                                  <button class="btn btn-warning btn-md mdi mdi-lead-pencil" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}');"> แก้ไข</button>
+                                  <button class="btn btn-warning btn-md mdi mdi-lead-pencil" data-toggle="modal" data-target="#modalEditObj" onclick="addContentToModal({{$data->idobject}},'{{$data->nameObject}}',{{$currentyearid}});"> แก้ไข</button>
                                   @if(count($obkr)>0)
                                     @foreach($obkr as $data2)
                                       @if ($data->idobject==$data2->object_idobject) 
                                         @break
                                       @elseif ($data2->idKR==$max) 
-                                        <button class="btn btn-danger btn-md ml-4 mdi mdi-delete-forever" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                        <button class="btn btn-danger btn-md ml-4 mdi mdi-delete-forever" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}},{{$currentyearid}});"> ลบ</button>
                                       
                                       @endif     
                                     @endforeach
                                   @else
-                                    <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}});"> ลบ</button>
+                                    <button class="btn btn-danger btn-md ml-4" data-toggle="modal" data-target="#deletemodal" onclick="addIdToModal({{$data->idobject}},{{$currentyearid}});"> ลบ</button>
                                   @endif
                               </td>
                             </tr>
@@ -190,6 +172,7 @@
                                     <h3 class="modal-title newFont" id="exampleModalLabel">เพิ่มตัวชี้วัดตามคำรับรอง</h3>
                                     <hr>
                                         <input type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject" required>
+                                        <input id="object_year" type="hidden" class="form-control" placeholder="ปี"  name="yearobject">
                                     </div>                
                                 </div>
                                 <div class="modal-footer">
@@ -214,6 +197,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <input id="object_edit_id" type="hidden" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="keyobject">
+                                        <input id="object_edit_year_id" type="hidden" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="yearobject">
                                         <input id="object_edit_name" type="text" class="form-control" placeholder="หัวข้อตัวขี้วัด"  name="nameobject" required>
                                     </div>                
                                 </div>
@@ -237,6 +221,7 @@
                               <form class="forms-sample" action="{{route('deleteobject')}}" method="post">
                                 @csrf
                                 <input id="object_delete_id" type="hidden" class="form-control" name="delete_keyobject">
+                                <input id="object_year_id" type="hidden" class="form-control" name="year_object">
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-gradient-primary" data-dismiss="modal">ปิด</button>
                                   <button type="submit" class="btn btn-gradient-danger">ลบ</button>
@@ -275,12 +260,17 @@
     <script src="../../assets/js/file-upload.js"></script>
     <!-- End custom js for this page -->
     <script type="text/javascript">
-      function addIdToModal(id){
-        document.getElementById('object_delete_id').value = id;  
+      function addIdToModal(id,year){
+        document.getElementById('object_delete_id').value = id;
+        document.getElementById('object_year_id').value = year;    
       };
-      function addContentToModal(id,name){
+      function addYearToModal(year){
+        document.getElementById('object_year').value = year;  
+      };
+      function addContentToModal(id,name,year){
         document.getElementById('object_edit_id').value = id;
         document.getElementById('object_edit_name').value = name;
+        document.getElementById('object_edit_year_id').value = year;
       }; 
     </script>
   </body>

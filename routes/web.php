@@ -62,7 +62,8 @@ Route::get('file/download', [FileUploadController::class, 'getfile']);
 
 // Group 1
 Route::get('/section_one', [ObjectGroup1::class, 'index']);
-Route::get('/section_one/{id}', [Kr::class, 'index']);
+Route::get('/section_one/{year}', [ObjectGroup1::class, 'year']);
+Route::get('/section_one/{year}/{id}', [Kr::class, 'index']);
 Route::post('/section_one/addKR', [Kr::class, 'addKR'])->name('addKR');
 Route::post('/section_one/add', [ObjectGroup1::class, 'addObject'])->name('addobject');
 Route::post('/section_one/updateKR', [Kr::class, 'updateKR'])->name('updateKR');
