@@ -87,3 +87,7 @@ Route::get('/section_four', function () {
 Route::get('/section_five', function () {
     return view('section_five.addAdmin');
 })->name('/');
+
+Route::get('/search',  [UserOKR::class, 'search']);
+Route::post('/searchYear',  [UserOKR::class, 'searchyear']);
+Route::get('/searchKR/{id}',  [UserOKR::class, 'searchKR']);

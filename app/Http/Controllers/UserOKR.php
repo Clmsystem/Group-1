@@ -74,4 +74,31 @@ class UserOKR extends Controller
             ->get();
         return view('userGroup1.kr', compact('userKR', 'mount', 'Object'));
     }
+    public function search()
+    {
+        $year = DB::table('year')->get();
+        $search = DB::table('object')->where('year_year_id', '=', 0)->get();
+
+        return view('reportGroup1.search', compact('year', 'search'));
+    }
+    public function searchyear(Request $request)
+    {
+        $year = DB::table('year')->get();
+        $search = DB::table('object')->where('year_year_id', '=', $request->year)->get();
+
+        return view('reportGroup1.search', compact('year', 'search'));
+    }
+    public function searchKR($id)
+    {
+        $mount = (int)date('m');
+        $userKR = DB::table('object')
+            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+            ->where('krdetail.KR_object_idobject', '=', $id)
+            ->where('krdetail.mount', '=', $mount)
+            ->get();
+        $Object = $id;
+        return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
+    }
 }
