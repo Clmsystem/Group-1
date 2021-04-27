@@ -111,7 +111,7 @@
                                 <h4 class="card-title">{{$data->nameKR}}<span>
                                         <p style="text-align:right"><a href="#" class="card-description"><i class="mdi mdi-clipboard-text "></i>ลิ้งสำหรับเอกสารที่เกี่ยวข้อง <br></a></p>
                                     </span></h4>
-                                <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}">
+                                <form class="forms-sample" method="post" action="{{route('updateKRdetail')}}" enctype="multipart/form-data">
                                     @csrf
                                     @if($data->status_data == 1)
                                     <div class="form-group">
@@ -147,7 +147,7 @@
                                     </div>
                                     <div class=" form-group">
                                         <label class="newFont"> อัปโหลดหลักฐาน</label><br>
-                                        <input type="file" name="img[]" class="file-upload-default">
+                                        <input type="file" name="file" class="file-upload-default">
                                         <div class="input-group col-xs-12">
                                             <input type="text" class="form-control file-upload-info newFont" disabled="" placeholder="อัปโหลไฟล์">
                                             <span class="input-group-append">

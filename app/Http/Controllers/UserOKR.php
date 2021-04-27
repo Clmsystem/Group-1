@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\File;
 use Illuminate\Support\Facades\Session;
 
 class UserOKR extends Controller
@@ -36,6 +37,14 @@ class UserOKR extends Controller
     public function updateKRdetail(Request $request)
     {
         $idUser = session()->get('user')['id_employee'];
+        if($file = $request->file('file')){
+            $request->validate([
+                'file' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+            ]);
+            $name = $file->getClientOriginalName();
+            $evidence = 'evidences/'.$request->id;
+            $file->move($evidence, $name);
+        }
         DB::table('krdetail')
             ->where('idKRdetail', $request->id)
             ->update(['result' => $request->result, 'percent' => $request->percent, 'future_result' => $request->future_result, 'nameUser' => $idUser]);
