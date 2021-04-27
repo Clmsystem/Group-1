@@ -79,7 +79,7 @@
                 <div class="card">
                   <div class="card-body">
                   <div class="row">
-                    <div class="col-8" style="float:none;margin:auto;">
+                    <div class="col-6" style="float:none;margin:auto;">
                       @csrf
                       <select type="dropdown-toggle" class="form-control newFont" onchange="location = '/section_one/'+this.value;">
                           <optgroup class="newFont">
@@ -94,12 +94,13 @@
                           </optgroup>
                       </select>
                     </div>
-                    <div class="col-4" style="float:none;margin:auto;">
-                        <button class="btn btn-gradient-success btn-md ml-3 mdi mdi-lock" > Admin</button>
+                    <div class="col-6" style="float:none;margin:auto;">
+                        <button class="btn btn-gradient-success btn-md m-3 mdi mdi-lock" > Admin</button>
+                        <a href="/search"><button class="btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline" > Report</button></a>
                         @if ($flag==0)
-                          <button class="btn btn-lg btn-secondary mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction" disabled> เพิ่มตัวชี้วัดตามคำรับรอง</button>
+                          <button class="btn btn-lg btn-secondary m-3 mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction" disabled> เพิ่มตัวชี้วัดตามคำรับรอง</button>
                         @else
-                          <button class="btn btn-lg btn-gradient-primary mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction"> เพิ่มตัวชี้วัดตามคำรับรอง</button>
+                          <button class="btn btn-lg btn-gradient-primary m-3 mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction"> เพิ่มตัวชี้วัดตามคำรับรอง</button>
                         @endif
                     </div>
                   </div>
