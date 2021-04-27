@@ -91,11 +91,11 @@
                                 <option value="{{$years->year}}">{{$years->year}}</option>
                               @endif
                           @endforeach
-                          </optgroup>
+                          </opgroup>
                       </select>
                     </div>
                     <div class="col-6" style="float:none;margin:auto;">
-                        <button class="btn btn-gradient-success btn-md m-3 mdi mdi-lock" > Admin</button>
+                        <a href="/section_five"><button class="btn btn-gradient-success btn-md m-3 mdi mdi-lock" > Admin</button>
                         <a href="/search"><button class="btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline" > Report</button></a>
                         @if ($flag==0)
                           <button class="btn btn-lg btn-secondary m-3 mdi mdi-library-plus  newFont"  onclick="addYearToModal({{$currentyearid}});" data-toggle="modal" data-target="#modalAction" disabled> เพิ่มตัวชี้วัดตามคำรับรอง</button>
