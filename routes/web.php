@@ -77,5 +77,18 @@ Route::post('/section_one/deletekr', [Kr::class, 'deletekr'])->name('deletekr');
 Route::get('/userObject/{id}', [UserOKR::class, 'index']);
 Route::get('/userKr/{id}/{mount}', [UserOKR::class, 'userKR']);
 Route::post('/userKr/updateKr', [UserOKR::class, 'updateKRdetail'])->name('updateKRdetail');
-Route::post('/userKr', [UserOKR::class, 'userKRdetail'])->name('userKRdetail');
+Route::post('/userKrdetail', [UserOKR::class, 'userKRdetail'])->name('userKRdetail');
+Route::get('/userKrdetail',  [UserOKR::class, 'usermount']);
 // end Group1
+
+Route::get('/section_four', function () {
+    return view('section_four.selectAdmin');
+})->name('/');
+
+Route::get('/section_five', function () {
+    return view('section_five.addAdmin');
+})->name('/');
+
+Route::get('/search',  [UserOKR::class, 'search']);
+Route::post('/searchYear',  [UserOKR::class, 'searchyear']);
+Route::get('/searchKR/{id}',  [UserOKR::class, 'searchKR']);
