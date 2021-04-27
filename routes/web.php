@@ -92,3 +92,4 @@ Route::get('/section_four', function () {
 Route::get('/search',  [UserOKR::class, 'search']);
 Route::post('/searchYear',  [UserOKR::class, 'searchyear']);
 Route::get('/searchKR/{id}',  [UserOKR::class, 'searchKR']);
+Route::post('/searchKrdetail', [UserOKR::class, 'searchKrdetail'])->name('searchKRdetail');

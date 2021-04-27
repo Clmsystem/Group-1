@@ -101,4 +101,18 @@ class UserOKR extends Controller
         $Object = $id;
         return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
     }
+    public function searchKRdetail(Request $request)
+    {
+
+        $userKR = DB::table('object')
+            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+            ->where('krdetail.KR_object_idobject', '=', $request->Object)
+            ->where('krdetail.mount', '=', $request->mount)
+            ->get();
+        $Object = $request->object;
+        $mount = $request->mount;
+        return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
+    }
 }
