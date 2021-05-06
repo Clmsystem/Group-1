@@ -37,12 +37,12 @@ class UserOKR extends Controller
     public function updateKRdetail(Request $request)
     {
         $idUser = session()->get('user')['id_employee'];
-        if($file = $request->file('file')){
+        if ($file = $request->file('file')) {
             $request->validate([
                 'file' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
             ]);
             $name = $file->getClientOriginalName();
-            $evidence = 'evidences/'.$request->id;
+            $evidence = 'evidences/' . $request->id;
             $file->move($evidence, $name);
         }
         DB::table('krdetail')
@@ -93,37 +93,43 @@ class UserOKR extends Controller
     public function searchyear(Request $request)
     {
         $year = DB::table('year')->get();
-        $search = DB::table('object')->where('year_year_id', '=', $request->year)->get();
-
+        $search = DB::table('object')
+            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+            ->where('krdetail.year_year_id', '=', 2564)
+            ->where('krdetail.mount', '=', $request->month)
+            ->get();
+        // dd($search);
         return view('reportGroup1.search', compact('year', 'search'));
     }
-    public function searchKR($id)
-    {
-        $mount = (int)date('m');
-        $userKR = DB::table('object')
-            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
-            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
-            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
-            ->where('krdetail.KR_object_idobject', '=', $id)
-            ->where('krdetail.mount', '=', $mount)
-            ->get();
-        $Object = $id;
-        return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
-    }
-    public function searchKRdetail(Request $request)
-    {
+    // public function searchKR($id)
+    // {
+    //     $mount = (int)date('m');
+    //     $userKR = DB::table('object')
+    //         ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+    //         ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+    //         ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+    //         ->where('krdetail.KR_object_idobject', '=', $id)
+    //         ->where('krdetail.mount', '=', $mount)
+    //         ->get();
+    //     $Object = $id;
+    //     return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
+    // }
+    // public function searchKRdetail(Request $request)
+    // {
 
-        $userKR = DB::table('object')
-            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
-            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
-            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
-            ->where('krdetail.KR_object_idobject', '=', $request->Object)
-            ->where('krdetail.mount', '=', $request->mount)
-            ->get();
-        $Object = $request->object;
-        $mount = $request->mount;
-        return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
-    }
+    //     $userKR = DB::table('object')
+    //         ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+    //         ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+    //         ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+    //         ->where('krdetail.KR_object_idobject', '=', $request->Object)
+    //         ->where('krdetail.mount', '=', $request->mount)
+    //         ->get();
+    //     $Object = $request->object;
+    //     $mount = $request->mount;
+    //     return view('reportGroup1.searchKR', compact('userKR', 'mount', 'Object'));
+    // }
     public function dashbord($id)
     {
 
