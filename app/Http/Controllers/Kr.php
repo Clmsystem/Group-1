@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class Kr extends Controller
 {
-    public function index($year,$id)
+    public function index($year, $id)
     {
         $data = Session::put('id', $id);
         $kr = DB::table('kr')
@@ -20,9 +20,9 @@ class Kr extends Controller
         $employee = DB::table('employee')->get();
         $autrority = DB::table('autrority')->get();
         $max = DB::table('autrority')->max('idautrority');
-        $flag = DB::table('year')->where('year',$year)->value('flag');
+        $flag = DB::table('year')->where('year', $year)->value('flag');
         // dd($autrority, $max);
-        return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max', 'objectName','flag'));
+        return view('section_one.objective', compact('kr', 'employee', 'autrority', 'max', 'objectName', 'flag'));
     }
     public function addKR(Request $request)
     {
@@ -36,12 +36,12 @@ class Kr extends Controller
 
         // ค่า kr ตัวล่าสุด
         $max = DB::table('kr')->max('idKR');
-
+        $yearid = Session::get('year_group1');
         // insert kr detail 12 เดือน
         for ($i = 1; $i <= 12; $i++) {
             $data2 = array();
             $data2["mount"] = $i;
-            $data2["year_year_id"] = 2564;
+            $data2["year_year_id"] = $yearid;
             $data2["KR_idKR"] = $max;
             $data2["KR_object_idobject"] = $id;
             DB::table('krdetail')->insert($data2);
@@ -85,9 +85,17 @@ class Kr extends Controller
     public function logKRdetail(Request $request)
     {
         DB::table('krdetail')
-            ->where('KR_object_idobject', $request->object)
+            ->where('year_year_id', $request->yearid)
             ->where('mount', $request->mountid)
             ->update(['status_data' => 1]);
-        return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
+        return redirect('/section_five');
+    }
+    public function UNlogKRdetail(Request $request)
+    {
+        DB::table('krdetail')
+            ->where('year_year_id', $request->yearid)
+            ->where('mount', $request->mountid)
+            ->update(['status_data' => 0]);
+        return redirect('/section_five');
     }
 }

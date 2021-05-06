@@ -83,9 +83,7 @@ Route::post('/userKrdetail', [UserOKR::class, 'userKRdetail'])->name('userKRdeta
 Route::get('/userKrdetail',  [UserOKR::class, 'usermount']);
 // end Group1
 
-Route::get('/section_four', function () {
-    return view('section_four.selectAdmin');
-})->name('/');
+
 
 
 
@@ -94,3 +92,6 @@ Route::post('/searchYear',  [UserOKR::class, 'searchyear']);
 Route::get('/searchKR/{id}',  [UserOKR::class, 'searchKR']);
 Route::post('/searchKrdetail', [UserOKR::class, 'searchKrdetail'])->name('searchKRdetail');
 Route::get('/{id}',  [UserOKR::class, 'dashbord']);
+Route::post('/showlog', [Showobject::class, 'showlog']);
+Route::post('/logKR', [Kr::class, 'logKRdetail']);
+Route::post('/UNlogKR', [Kr::class, 'UNlogKRdetail']);

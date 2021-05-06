@@ -97,7 +97,7 @@ class UserOKR extends Controller
             ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
             ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
             ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
-            ->where('krdetail.year_year_id', '=', 2564)
+            ->where('krdetail.year_year_id', '=', $request->year)
             ->where('krdetail.mount', '=', $request->month)
             ->get();
         // dd($search);
