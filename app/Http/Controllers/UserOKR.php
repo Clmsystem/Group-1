@@ -49,7 +49,7 @@ class UserOKR extends Controller
         date_default_timezone_set('Asia/Bangkok');
         DB::table('krdetail')
             ->where('idKRdetail', $request->id)
-            ->update(['result' => $request->result, 'percent' => $request->percent, 'future_result' => $request->future_result, 'nameUser' => $name_emp,'time'=>date("Y-m-d")]);
+            ->update(['result' => $request->result, 'percent' => $request->percent, 'future_result' => $request->future_result, 'nameUser' => $name_emp, 'time' => date("Y-m-d")]);
         return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
     }
 
@@ -72,8 +72,8 @@ class UserOKR extends Controller
     }
     public function usermount()
     {
-        $Object = Session::get('object');;
-        $mount = Session::get('mount');;
+        $Object = Session::get('object');
+        $mount = Session::get('mount');
         $idUser = session()->get('user')['id_employee'];
         $userKR = DB::table('object')
             ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
@@ -89,8 +89,9 @@ class UserOKR extends Controller
     {
         $year = DB::table('year')->get();
         $search = DB::table('object')->where('year_year_id', '=', 0)->get();
-
-        return view('reportGroup1.search', compact('year', 'search'));
+        $yy = 0;
+        $mm = 0;
+        return view('reportGroup1.search', compact('year', 'search', 'yy', 'mm'));
     }
     public function searchyear(Request $request)
     {
@@ -103,7 +104,11 @@ class UserOKR extends Controller
             ->where('krdetail.mount', '=', $request->month)
             ->get();
         // dd($search);
-        return view('reportGroup1.search', compact('year', 'search'));
+        Session::put('yeardownload', $request->year);
+        Session::put('mountdownload', $request->month);
+        $yy = Session::get('yeardownload');
+        $mm = Session::get('mountdownload');
+        return view('reportGroup1.search', compact('year', 'search', 'yy', 'mm'));
     }
     // public function searchKR($id)
     // {
@@ -141,5 +146,58 @@ class UserOKR extends Controller
             ->get();
 
         return view('userGroup1.dashbord', compact('dataKR'));
+    }
+    public function downloadGroubOne()
+    {
+
+        $year = DB::table('year')->get();
+        $Object = Session::get('yeardownload');
+        $mount = Session::get('mountdownload');
+        $yy = Session::get('yeardownload');
+        $mm = Session::get('mountdownload');
+        $search = DB::table('object')
+            ->leftJoin('kr', 'object.idobject', '=', 'kr.object_idobject')
+            ->leftJoin('krdetail', 'kr.idKR', '=', 'krdetail.KR_idKR')
+            ->leftJoin('autrority', 'kr.idKR', '=', 'autrority.KR_idKR')
+            ->where('krdetail.year_year_id', '=', $Object)
+            ->where('krdetail.mount', '=', $mount)
+            ->get();
+
+        if (count($search) > 0) {
+            $months_th = array("มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+            $headers = array(
+                "Content-type"        => "text/csv",
+                "Content-Disposition" => "attachment; filename=รายงาน_" . $months_th[$mount - 1] . ".csv",
+                "Pragma"              => "no-cache",
+                "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                "Expires"             => "0"
+            );
+
+            $callback = function () use ($year, $search, $yy, $mm) {
+                $columns = array(
+                    'ตัวชี้วัดตามคำรับรอง',
+                    'เป้าหมายตามคำรับรอง',
+                    'ผล',
+                    'ร้อยละผลสำเร็จ',
+                    'งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต'
+                );
+                $file = fopen("php://output", "w");
+                fputs($file, $bom = chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+                fputcsv($file, $columns);
+                foreach ($search as $data) {
+                    $row['name_item']  = $data->nameObject;
+                    $row['count']    = $data->nameKR;
+                    $row['unit_name']    = $data->result;
+                    $row['description']  = $data->percent;
+                    $row['name_employee']  = $data->future_result;
+
+                    fputcsv($file, array($row['name_item'], $row['count'], $row['unit_name'], $row['description'], $row['name_employee']));
+                }
+                fclose($file);
+            };
+            return response()->stream($callback, 200, $headers);
+        } else {
+        }
     }
 }
