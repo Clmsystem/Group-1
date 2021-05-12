@@ -18,46 +18,46 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
 
-    /* adjust font this page */
-    .newFont {
-        font-family: 'Mitr', sans-serif;
-    }
+        /* adjust font this page */
+        .newFont {
+            font-family: 'Mitr', sans-serif;
+        }
 
-    .newFonts {
-        font-family: 'Mitr', sans-serif;
-        font-size: 50px !important;
-    }
-
-
-    .dropdown .dropdown-menu .dropdown-item {
-        font-size: 0.8rem;
-        padding: 0;
-    }
-
-    /* adjust btn position */
-    .button-position {
-        float: right;
-        margin: -8px;
-    }
+        .newFonts {
+            font-family: 'Mitr', sans-serif;
+            font-size: 50px !important;
+        }
 
 
+        .dropdown .dropdown-menu .dropdown-item {
+            font-size: 0.8rem;
+            padding: 0;
+        }
 
-    td.break {
-        word-wrap: break-word;
-        /* word-break: break-all; */
-        white-space: normal;
-    }
+        /* adjust btn position */
+        .button-position {
+            float: right;
+            margin: -8px;
+        }
 
 
-    /* adjust btn size */
-    .btns {
-        padding: 0.9rem 2em;
-        font-size: 0.875rem;
-    }
-</style>
+
+        td.break {
+            word-wrap: break-word;
+            /* word-break: break-all; */
+            white-space: normal;
+        }
+
+
+        /* adjust btn size */
+        .btns {
+            padding: 0.9rem 2em;
+            font-size: 0.875rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,7 +71,7 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <h1 class="text-success mdi mdi-face newFont" > ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}} </h1>
+                    <h1 class="text-success mdi mdi-face newFont"> ยินดีต้อนรับคุณ {{session()->get('user')['name_employee']}} </h1>
                     <div class="page-header">
                         <h3 class="page-title newFont">ส่วนที่ 1 ผลการดำเนินงานตามตัวชี้วัดคำรับรองการปฏิบัติงาน ตามนโยบายเร่งด่วนของอธิการบดี (OKRs) </h3>
                     </div>
@@ -79,29 +79,29 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <button type="button" class="float-right btn btn-gradient-primary newFont" onclick="myFunction()">2564</button> <br><br>
+                                    <a href="/search"><button class="float-right  btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline"> Report</button></a>
+                                    <br><br>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <h5 class = newFont>ตัวชี้วัดตามคำรับรอง</h5>
+                                                <h5 class=newFont>ตัวชี้วัดตามคำรับรอง</h5>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($uniqueObject as $data)
-                                                @for ($i = 0; $i < count($data); $i++)
-                                                    @if ($data[$i]->status==1)
-                                                        <tr>
-                                                            <td><a href="{{url('/userKr/'.$data[$i]->idobject.'/'.$mount)}}" class="text-danger mdi mdi-emoticon-neutral newFont"> {{$data[$i]->nameObject}}</a></td>
-                                                        </tr>
-                                                        @break
-                                                    @elseif($i+1> count($data))
-                                                        <tr>
-                                                            <td><a href="{{url('/userKr/'.$data[$i]->idobject.'/'.$mount)}}" class="text-success mdi mdi-emoticon newFont"> {{$data[$i]->nameObject}}</a></td>
-                                                        </tr>
-                                                    @endif
+                                            @for ($i = 0; $i < count($data); $i++) @if ($data[$i]->status==1)
+                                                <tr>
+                                                    <td><a href="{{url('/userKr/'.$data[$i]->idobject.'/'.$mount)}}" class="text-danger mdi mdi-emoticon-neutral newFont"> {{$data[$i]->nameObject}}</a></td>
+                                                </tr>
+                                                @break
+                                                @elseif($i+1> count($data))
+                                                <tr>
+                                                    <td><a href="{{url('/userKr/'.$data[$i]->idobject.'/'.$mount)}}" class="text-success mdi mdi-emoticon newFont"> {{$data[$i]->nameObject}}</a></td>
+                                                </tr>
+                                                @endif
                                                 @endfor
-                                            @endforeach
+                                                @endforeach
                                         </tbody>
                                     </table>
                                     </form>
