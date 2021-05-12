@@ -97,7 +97,7 @@
                                         <div class="form-group col-md-4">
                                             <select id="mountSelect" class="form-control" name="month">
                                                 <optgroup class="newFont">
-                                                    <option hidden value="0" >เดือน</option>
+                                                    <option hidden value="0">เดือน</option>
                                                     <option value="10">ตุลาคม</option>
                                                     <option value="11">พฤศจิกายน</option>
                                                     <option value="12">ธันวาคม</option>
@@ -128,12 +128,18 @@
 
 
                     <div class="card">
-                    <div class="card-body">
-                    <div class="row">
-                        <div class="form-group col-md-12"></div>
-                        <div class="col-md-12 " >
-                                <table class="table table-bordered newFont">
-                                <thead>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-12"></div>
+                                <div class="col-md-12 ">
+                                    <table class="table table-bordered newFont">
+                                        <div class="col-12" style="float:none;margin:auto;">
+                                            @if($yy == 0 || $mm ==0)
+                                            @else
+                                            <a href="/douwloadgone"><button class="btn btn-gradient-success btn-md m-3 mdi mdi-lock"> download</button>
+                                                @endif
+                                        </div>
+                                        <thead>
                                             <tr class="d-flex center">
                                                 <th class="col-sm-2" scope="col">
                                                     <h7 class="newFont">ตัวชี้วัดตามคำรับรอง</h7>
@@ -151,7 +157,7 @@
                                                     <h7 class="newFont">งานที่สำเร็จแล้ว/งานที่จะดำเนินการในอนาคต</h7>
                                                 </th>
                                             </tr>
-                                </thead>
+                                        </thead>
                                         <tbody>
                                             @foreach ($search as $data)
                                             <tr class="d-flex">
@@ -170,14 +176,14 @@
                                                 <th class="col-sm-3" scope="col">
                                                     <h7 class="newFont">{{$data->future_result}}</h7>
                                                 </th>
-                                                <th  scope="col"class="newFont"><a href="/{{$data->KR_idKR}}"><button class="btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline newFont"> รายงานผล </button></a></th>
+                                                <th scope="col" class="newFont"><a href="/{{$data->KR_idKR}}"><button class="btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline newFont"> รายงานผล </button></a></th>
                                             </tr>
                                             @endforeach
                                         </tbody>
-                                </table>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
                     </div>
 
 

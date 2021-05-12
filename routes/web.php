@@ -81,6 +81,7 @@ Route::get('/userKr/{id}/{mount}', [UserOKR::class, 'userKR']);
 Route::post('/userKr/updateKr', [UserOKR::class, 'updateKRdetail'])->name('updateKRdetail');
 Route::post('/userKrdetail', [UserOKR::class, 'userKRdetail'])->name('userKRdetail');
 Route::get('/userKrdetail',  [UserOKR::class, 'usermount']);
+Route::get('douwloadgone', [UserOKR::class, 'downloadGroubOne']);
 // end Group1
 
 
