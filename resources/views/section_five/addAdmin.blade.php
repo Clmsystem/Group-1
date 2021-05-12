@@ -72,6 +72,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+        <a href="/section_one"><button class="float-right btn btn-gradient-info btn-md m-3 mdi mdi-arrow-left newFont">ย้อนกลับ</button></a>
           <div class="col-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">

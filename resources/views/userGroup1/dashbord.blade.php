@@ -51,6 +51,7 @@
     <div class="content-wrapper">
       <div class="page-header">
         <h3 class="newFont"> กราฟตัวชี้วัด</h3>
+        <button class="btn btn-gradient-info btn-md m-3 mdi mdi-arrow-left newFont" onclick="goBack()" >ย้อนกลับ</button>
       </div>
       @foreach($dataKR as $i => $data)
       @if($data->percent==null)
@@ -245,4 +246,8 @@
   };
   var chartQuarter = new ApexCharts(document.querySelector("#chart-quarter"), optionsQuarter);
   chartQuarter.render();
+
+  function goBack() {
+    window.history.back();
+  }
 </script>

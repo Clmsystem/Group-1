@@ -32,7 +32,7 @@ class UserOKR extends Controller
             ->where('krdetail.KR_object_idobject', '=', $Object)
             ->where('krdetail.mount', '=', $mount)
             ->get();
-        return view('userGroup1.kr', compact('userKR', 'mount', 'Object'));
+        return view('userGroup1.kr', compact('userKR', 'mount', 'Object','idUser'));
     }
     public function updateKRdetail(Request $request)
     {
@@ -134,7 +134,6 @@ class UserOKR extends Controller
     // }
     public function dashbord($id)
     {
-
         $dataKR = DB::table('krdetail')
             ->where('KR_idKR', '=', $id)
             ->select('percent', 'mount')

@@ -103,6 +103,12 @@
                                 </select>
                             </form>
                         </div>
+                        <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item newFont" aria-current="page"><a href="/userObject/{{$idUser}}">Objective</a></li>
+                                    <li class="breadcrumb-item active newFont">Key Results</li>
+                                </ol>
+                        </nav>
                     </div>
                     @foreach ($userKR as $data)
                     <div class="col-12 grid-margin stretch-card">
