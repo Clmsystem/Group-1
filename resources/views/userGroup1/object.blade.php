@@ -79,12 +79,12 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href="/search"><button class="float-right  btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline"> Report</button></a>
+                                    <a href="/search"><button class="float-right  btn btn-gradient-info btn-md m-3 mdi mdi-elevation-decline "> Report</button></a>
                                     <br><br>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <h5 class=newFont>ตัวชี้วัดตามคำรับรอง</h5>
+                                                <h5 class="newFont">ตัวชี้วัดตามคำรับรอง</h5>
                                                 <th></th>
                                             </tr>
                                         </thead>

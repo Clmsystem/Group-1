@@ -135,10 +135,10 @@
                                     <!-- <button type="button" class="btn btn-primary btns ">กราฟ</button> -->
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <button type="button" class="btn btn-gradient-primary btns2 ">ดาวน์โหลด</button>
+                                    <button type="button" class="btn btn-gradient-primary btns2 newFont">ดาวน์โหลด</button>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <button type="button" class="btn btn-gradient-primary btns ">ค้นหา</button>
+                                    <button type="button" class="btn btn-gradient-primary btns newFont">ค้นหา</button>
                                 </div>
 
 

@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-2">
-                                            <button type="submit" class="btn btn-inverse-primary btns newFont ">ค้นหา</button>
+                                            <button type="submit" class="btn btn-primary btn-fw newFont ">ค้นหา</button>
                                         </div>
                                     </div>
                                 </form>
@@ -136,7 +136,7 @@
                                         <div class="col-12" style="float:none;margin:auto;">
                                             @if($yy == 0 || $mm ==0)
                                             @else
-                                            <a href="/douwloadgone"><button class="btn btn-gradient-success btn-md m-3 mdi mdi-lock"> download</button>
+                                            <a href="/douwloadgone"><button class="float-right btn btn-success btn-fw m-3 mdi mdi-briefcase-download newFont"> download</button>
                                                 @endif
                                         </div>
                                         <thead>
