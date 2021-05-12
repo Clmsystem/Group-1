@@ -146,6 +146,10 @@
                                         <input type="hidden" class="form-control" name="id" id="exampleInputPassword4" class="newFont" value="{{$data->idKRdetail}}">
                                     </div>
                                     <div class=" form-group">
+                                        <label for="exampleInputPassword4" class="newFont">บันทึกล่าสุดโดย</label><br>
+                                        <input type="text" class="form-control newFont" name="name" id="exampleInputEmail3" placeholder="ชื่อ" value="{{$data->nameUser}} เมื่อวันที่ {{$data->time}}" readonly>
+                                    </div>
+                                    <!-- <div class=" form-group">
                                         <label class="newFont"> อัปโหลดหลักฐาน</label><br>
                                         <input type="file" name="file" class="file-upload-default">
                                         <div class="input-group col-xs-12">
@@ -154,7 +158,7 @@
                                                 <button class="file-upload-browse btn btn-warning mdi mdi-folder-upload newFont" type="button"> อัปโหลด</button>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div style="text-align:right">
                                         <button type="submit" class="btn btn-success btn-fw mdi mdi-content-save-all newFont">บันทึก</button>
                                         <button type="reset" class="btn btn-danger btn-fw  mdi mdi-delete-forever newFont">ยกเลิก</button>

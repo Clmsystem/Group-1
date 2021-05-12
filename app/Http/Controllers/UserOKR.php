@@ -37,17 +37,19 @@ class UserOKR extends Controller
     public function updateKRdetail(Request $request)
     {
         $idUser = session()->get('user')['id_employee'];
-        if ($file = $request->file('file')) {
-            $request->validate([
-                'file' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-            ]);
-            $name = $file->getClientOriginalName();
-            $evidence = 'evidences/' . $request->id;
-            $file->move($evidence, $name);
-        }
+        $name_emp = DB::table('employee')->where('id_employee', '=', $idUser)->value('name_employee');
+        // if ($file = $request->file('file')) {
+        //     $request->validate([
+        //         'file' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+        //     ]);
+        //     $name = $file->getClientOriginalName();
+        //     $evidence = 'evidences/' . $request->id;
+        //     $file->move($evidence, $name);
+        // }
+        date_default_timezone_set('Asia/Bangkok');
         DB::table('krdetail')
             ->where('idKRdetail', $request->id)
-            ->update(['result' => $request->result, 'percent' => $request->percent, 'future_result' => $request->future_result, 'nameUser' => $idUser]);
+            ->update(['result' => $request->result, 'percent' => $request->percent, 'future_result' => $request->future_result, 'nameUser' => $name_emp,'time'=>date("Y-m-d")]);
         return redirect()->back()->with('sucess', 'บันทึกข้อมูลเรียบร้อย');
     }
 
